@@ -4,5 +4,5 @@ include
 lib
 lib64
 pyvenv.cfg
-share/python-wheels
+share
 lib/python3.8/site-packges
