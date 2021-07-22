@@ -4,6 +4,8 @@ from flask_cors import CORS, cross_origin
 from dotenv import load_dotenv, find_dotenv
 import os
 
+
+jwt = JWTManager()
 cors=CORS()
 
 def create_app():
