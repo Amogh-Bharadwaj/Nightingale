@@ -3,6 +3,7 @@ import {EmailIcon,ViewIcon,LockIcon} from "@chakra-ui/icons";
 import Nightingale from "../assets/Nightingale.gif"
 import SignUpForm from "../components/signupform";
 import LogInForm from "../components/loginform";
+import OTPForm from "../components/otp";
 import "./landingpage.css";
 import 
 {   Flex,
@@ -54,7 +55,7 @@ import
       <Text 
       fontFamily="Tahoma" 
       fontSize={{base:"xs",md:"md"}}>
-        I have an account
+        Log in with existing account
       </Text>
 
    </Button>)

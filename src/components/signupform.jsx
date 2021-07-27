@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {EmailIcon,ViewIcon,LockIcon} from "@chakra-ui/icons";
-
+import OTPForm from "./otp";
 
 import 
 {   Flex,
@@ -33,18 +33,23 @@ const SignUpForm=()=>{
 
   //States for validation
   const [emailValidity,setEmailValidity] = useState(false);
-  const [databaseEmails,setDBEmails]=useState([])
   const [databaseAliases,setDBAliases]=useState([])
 
   //States for errors
-  const [emailErrorMessage,setEmailError]=useState("Email address already exists")
-  const [aliasErrorMessage,setAliasError]=useState("Alias is taken")
+  const [emailErrorMessage,setEmailError]=useState("")
+  const [aliasErrorMessage,setAliasError]=useState("")
+  const [passwordErrorMessage,setPasswordError]=useState("")
+
+  //State for OTP
+  const [otpVerified,setVerification]=useState(false)
+
 
 
 
   const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   
   const getEmail=(e)=>{
+      setEmailError("")
       let mailid = e.target.value;
       
       setEmailValidity(emailPattern.test(String(userEmail).toLowerCase()));
@@ -52,31 +57,55 @@ const SignUpForm=()=>{
   }
 
   const getPassword=(e)=>{
+    setPasswordError("")
     setPassword(e.target.value);
   }
 
   const getAlias=(e)=>{
     setAlias(e.target.value);
+    
+  }
+
+  const toggleVerified=()=>{
+    setVerification(true);
   }
   
   const handleSubmit=(e)=>{
-
+    let error=false;
+    e.preventDefault()
     setEmailValidity(emailPattern.test(String(userEmail).toLowerCase()));
-    if(!emailValidity){setEmailError("Enter a proper email address!")}
+    if(!emailValidity){setEmailError("[ Enter a proper email address! ]"); error=true;}
+
+    if(userAlias.length==0){setAliasError("[ Enter an alias! ]");error=true;}
+
+    if(userPassword.length==0){setPasswordError("[ Enter a password! ]");error=true;}
+    if(error==true){console.log("Error is true");return;}
+
+    let pass=true;
     
-    fetch(`http://127.0.0.1:5000/tail/user-details`,
+    console.log("Performing post request")
+    fetch(`http://127.0.0.1:5000/tail/signup`,
     {
-      method:"POST".
+      method:"POST",
+      body: JSON.stringify({
+        email:userEmail,
+        alias:userAlias,
+        password:userPassword
+      }),
       headers: {
-        "Content-type":""
-      }
+        "Content-type":"application/json"
+      },
     }
-    )
-
-    
-
-
+    ).then((response)=> response.json())
+     .then((json)=>{
+       console.log("Post response: ", json);
+       if("mailError" in json){setEmailError("[ Email already exists! ]");pass=false;}
+       if("aliasError" in json){setAliasError("[ Alias already exists! ]");pass=false;}
+     })
+     if(pass==true){toggleVerified()}
   }
+
+
   const fetchCredentialRecords=()=>{
     fetch(
       `http://127.0.0.1:5000/tail/user-details`,
@@ -90,7 +119,6 @@ const SignUpForm=()=>{
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        setDBEmails(json.emails)
         setDBAliases(json.aliases)
         console.log("Fetched")
       });
@@ -98,19 +126,19 @@ const SignUpForm=()=>{
 
   useEffect(() => {
     fetchCredentialRecords();
-    if(databaseEmails.length>0)console.log("Emails",databaseEmails)
     if(databaseAliases.length>0)console.log("Aliases",databaseAliases)
-  },[]);
+    if(databaseAliases.indexOf(userAlias)!=-1){setAliasError("[ Alias is taken! ]")}
+    else{setAliasError("")}
+  },[userAlias]);
 
-  return(
-       <form >
+  if(!otpVerified){return(
+       <form onSubmit={handleSubmit}>
         <FormControl padding="2rem" >
 
-          <VStack 
-           spacing={4} 
-           align="centre" 
-           w="full">
-
+           <VStack 
+            spacing={4} 
+            align="centre" 
+            w="full">
 
            <Box w="full" >
             <Text 
@@ -141,8 +169,7 @@ const SignUpForm=()=>{
             fontSize={{base:"xs",md:"md"}}
             color="red.200"
             >
-             [ {emailErrorMessage} ]
-
+              {emailErrorMessage} 
             </Text>
           
           </Flex>
@@ -175,8 +202,7 @@ const SignUpForm=()=>{
             fontSize={{base:"xs",md:"md"}}
             color="red.200"
             >
-             [ {aliasErrorMessage} ]
-
+              {aliasErrorMessage} 
             </Text>
           </Flex>
 
@@ -194,9 +220,19 @@ const SignUpForm=()=>{
 
 
           <Box w="full">
+          <Flex direction="row">
           <FormLabel>
             <Text fontFamily="Tahoma" fontSize={{base:"xs",md:"md"}}>Password</Text>
           </FormLabel>
+          <Text 
+            fontFamily="Tahoma" 
+            fontSize={{base:"xs",md:"md"}}
+            color="red.200"
+            >
+              {passwordErrorMessage} 
+
+            </Text>
+            </Flex>
 
           <InputGroup>
           <InputLeftElement children= {<LockIcon/>} />
@@ -221,6 +257,7 @@ const SignUpForm=()=>{
            borderLeft="1px solid rgba(255,255,255,0.5)"  
            borderRadius="2%" 
            type="submit"
+           
           >
             <Text fontFamily="Tahoma" fontSize={{base:"xs",md:"md"}}>Proceed</Text>
           </Button>
@@ -232,10 +269,13 @@ const SignUpForm=()=>{
 
         </FormControl>
         </form>
+  )}
+  else{
+    return(
+      <OTPForm/>
 
-        
-  
-  )
+    )
+  }
 }
 
 export default SignUpForm;

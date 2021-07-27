@@ -97,26 +97,30 @@ def OTPVerification():
     
 
 
-
 @auth_blueprint.route("/login", methods=["POST"])
 def LogIn():
     #Fetching data from frontend
-    alias=hashed(request.json["user_alias"])
-    password=hashed(request.json["user_password"])
+    alias=request.json["user_alias"]
+    password=request.json["user_password"]
     
     #Checking if alias exists
-    alias_exist_sql="SELECT user_id,user_password FROM users WHERE user_alias=(%s)"
+    alias_exist_sql="SELECT COUNT(*) FROM users WHERE user_alias=(%s)"
     alias_exist_data=(alias,)
     cursor.execute(alias_exist_sql,alias_exist_data)
-    if(cursor.rowcount==0):
+    result = int(cursor.fetchall()[0][0])
+    if result==0:
         return {"aliasError":"No such alias exists!"}
 
-    result=cursor.fetchone()
     #Check if password is correct
-    if(str(result[0][1])!=password):
+    password_sql="SELECT user_id FROM users where user_alias=(%s) AND user_password=crypt(%s,user_password)"
+    password_data=(alias,password,)
+    cursor.execute(password_sql,password_data)
+    result = cursor.fetchall()[0]
+    if cursor.rowcount<1:
         return {"passwordError":"Wrong password!"}
-    
-    access_token = create_access_token(identity=result[0][0])
+
+
+    access_token = create_access_token(identity=result[0])
     return jsonify(jwt=access_token)
     
 
