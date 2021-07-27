@@ -1,11 +1,17 @@
-from flask import jsonify, request, Blueprint
+from flask import Flask,jsonify, request, Blueprint,current_app as app
 from flask_jwt_extended import jwt_optional, get_jwt_identity, create_access_token
 from flask_mail import Message
+from NightTail import mail
+
 import psycopg2
 import os
 
-from dotenv import load_dotenv
-load_dotenv()
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv(),verbose=True)
+print(os.environ.get("PSQLUSER"),find_dotenv())
+  
+conn=psycopg2.connect(host=os.getenv("HOSTNAME"),port=os.getenv("PORT"), database=os.getenv("DATABASE"),user=os.getenv("PSQLUSER"),password=os.getenv("PASSWORD"))
+cursor=conn.cursor()
 
 from random import randint
 otp = randint(pow(10,5),pow(10,6)-1) #otp generation
@@ -14,24 +20,36 @@ otp = randint(pow(10,5),pow(10,6)-1) #otp generation
 
 auth_blueprint = Blueprint("auth", __name__, url_prefix="/tail")
 
+@auth_blueprint.route("/user-details")
+@jwt_optional
+def EmailALiasList():
+    details = []
+    
+    #Fetching all user emails and aliases
+    details_sql="SELECT json_build_object('userEmail',json_agg(users.user_email),'userAlias',json_agg(user_alias)) FROM users"
+        
+    cursor.execute(details_sql)
+    details = cursor.fetchall()[0]
+
+    print("Details: ",details[0])
+    
+    return jsonify(emails=details[0]['userEmail'],aliases=details[0]['userAlias'])
+
+
 @auth_blueprint.route("/signup", methods=["POST"])
 def SignUp():
     #Fetching data from frontend
-    emailid = request.json["email"]
+    emailid =  request.json["email"]
     alias = request.json["alias"]
     password = request.json["password"]
-    
-    #Connecting to database
-    conn=psycopg2.connect(host=os.getenv("HOSTNAME"),port=os.getenv("PORT"), database=os.getenv("DATABASE"),user=os.getenv("USER"),password=os.getenv("PASSWORD"))
-    cursor=conn.cursor()
-    
+     
     #Checking if email already exists
-    email_sql="SELECT COUNT(*) FROM users where user_email=(%s)"
+    email_sql="SELECT COUNT(*) FROM users where user_email=crypt(%s,user_email)"
     email_data=(emailid,)
     cursor.execute(email_sql,email_data)
     result = int(cursor.fetchall()[0][0])
     if result>0:
-        return {"mailError":"Email exists already"}
+        return {"mailError":"Email exists already!"}
     
     #Checking if alias already exists
     alias_sql="SELECT COUNT(*) FROM users where user_alias=(%s)"
@@ -39,7 +57,7 @@ def SignUp():
     cursor.execute(alias_sql,alias_data)
     result = int(cursor.fetchall()[0][0])
     if result>0:
-        return {"aliasError":"Alias exists already"}
+        return {"aliasError":"Alias exists already!"}
 
     body = f"Thank you for using Nightingale! Your OTP is: {otp}"
     print("Mail body:\n",body)
@@ -62,22 +80,19 @@ def OTPVerification():
     password = request.json["password"]
     user_otp = int(request.json["otp"])
     if(user_otp!=otp):
-        return {"otpError":"Wrong otp"}
+        return {"otpError":"Wrong OTP! Try again"}
     
-    conn=psycopg2.connect(host=os.getenv("HOSTNAME"),port=os.getenv("PORT"), database=os.getenv("DATABASE"),user=os.getenv("USER"),password=os.getenv("PASSWORD"))
-    cursor=conn.cursor()
-
-     #Inserting user data into the database
-    insert_sql="INSERT INTO users VALUES (DEFAULT,%s,%s,%s);"
+     #Inserting hashed user data into the database
+    insert_sql = "INSERT INTO users VALUES (DEFAULT,crypt(%s,gen_salt('bf')),%s,crypt(%s, gen_salt('bf')));"
     insert_data=(emailid,alias,password)
     cursor.execute(insert_sql,insert_data)
     conn.commit()
 
-    cur.execute("SELECT user_id from user WHERE user_alias = (%s)", (alias,))
-    result = cur.fetchone()
+    cursor.execute("SELECT user_id from users WHERE user_alias=(%s)", (alias,))
+    result = cursor.fetchone()
+    print("Result:",result[0])
 
-    cur.close()
-    access_token = create_access_token(identity=int(result[0][0]))
+    access_token = create_access_token(identity=int(result[0]))
     return jsonify(jwt=access_token)
     
 
@@ -86,24 +101,20 @@ def OTPVerification():
 @auth_blueprint.route("/login", methods=["POST"])
 def LogIn():
     #Fetching data from frontend
-    alias=request.json["user_alias"]
-    password=request.json["user_password"]
-
-     #Connecting to database
-    conn=psycopg2.connect(host=os.getenv("HOSTNAME"),port=os.getenv("PORT"), database=os.getenv("DATABASE"),user=os.getenv("USER"),password=os.getenv("PASSWORD"))
-    cursor=conn.cursor()
+    alias=hashed(request.json["user_alias"])
+    password=hashed(request.json["user_password"])
     
     #Checking if alias exists
     alias_exist_sql="SELECT user_id,user_password FROM users WHERE user_alias=(%s)"
     alias_exist_data=(alias,)
     cursor.execute(alias_exist_sql,alias_exist_data)
     if(cursor.rowcount==0):
-        return {"aliasError":"No such alias exists"}
+        return {"aliasError":"No such alias exists!"}
 
     result=cursor.fetchone()
     #Check if password is correct
     if(str(result[0][1])!=password):
-        return {"passwordError":"Wrong password"}
+        return {"passwordError":"Wrong password!"}
     
     access_token = create_access_token(identity=result[0][0])
     return jsonify(jwt=access_token)

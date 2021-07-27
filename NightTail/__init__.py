@@ -5,6 +5,7 @@ from dotenv import load_dotenv, find_dotenv
 from flask_mail import Mail
 import os
 
+
 jwt = JWTManager()
 cors=CORS()
 mail = Mail()
@@ -12,8 +13,8 @@ mail = Mail()
 from NightTail.auth import auth_blueprint
 def create_app():
 
-    app = Flask(__name__,static_folder='../src/public',static_url_path='')
-
+    app = Flask(__name__,static_folder='../public',static_url_path='')
+    load_dotenv(find_dotenv())
     app.config["JWT_SECRET_KEY"] = os.getenv("JWT_KEY")
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = 24 * 60 * 60
     app.config["CORS_HEADERS"] = "Content-Type"
@@ -24,7 +25,7 @@ def create_app():
     app.config["MAIL_USE_SSL"] = True
     app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
     app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
-
+    
     
     jwt.init_app(app)
     cors.init_app(app)

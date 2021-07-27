@@ -25,8 +25,13 @@ const LogInForm=()=>{
   const [userAlias,setAlias] = useState("");
   const [userPassword,setPassword] = useState("");
 
+  const testSubmit=(e)=>{
+    e.preventDefault()
+    console.log("submit")
+  }
+
   return(
-       <form >
+       <form onSubmit={testSubmit}>
         <FormControl padding="2rem" >
 
           <VStack 
@@ -81,7 +86,7 @@ const LogInForm=()=>{
           </Box>
 
           
-          <Box w="full" pt="5rem">
+          <Box w="full" pt={{md:"5rem"}}>
           <Button
            w="full"
            h={{base:"2rem",md:"3rem"}}

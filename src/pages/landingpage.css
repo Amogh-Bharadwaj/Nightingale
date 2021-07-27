@@ -1,0 +1,21 @@
+@keyframes Title{
+    0% {
+        background-color: #4463D2;
+        background-clip: text;
+    }
+    50% {
+        background-color: #172967;
+        background-clip: text;
+    }
+    
+    100%{
+        background-color: #4463D2;
+        background-clip: text;
+        }
+    
+
+    
+
+   
+    
+}

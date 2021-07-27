@@ -3,7 +3,7 @@ import {EmailIcon,ViewIcon,LockIcon} from "@chakra-ui/icons";
 import Nightingale from "../assets/Nightingale.gif"
 import SignUpForm from "../components/signupform";
 import LogInForm from "../components/loginform";
-import "./login.css";
+import "./landingpage.css";
 import 
 {   Flex,
     Stack,
@@ -20,20 +20,15 @@ import
     Link,
     VStack,
     Image,
-    Popover,
-    PopoverArrow,
-    PopoverBody,
-    PopoverContent,
-    PopoverTrigger,
-    PopoverCloseButton,
-    Portal,
     Heading
   
 } from "@chakra-ui/react"
 
  const Login=()=> {
+
+
    
-    const [authForm,setForm] = useState(<LogInForm/>)
+    const [authForm,setForm] = useState(<SignUpForm/>)
 
     const InitialiseSignUp =()=>{
       setForm(<SignUpForm/>)
@@ -48,7 +43,6 @@ import
     const signupButton=(<Button
     mx="2rem"
     height={{base:"2rem",md:"3rem"}}
-    
     _hover={{bgColor:"none"}}
     bgGradient="linear(to-l, #0E1442 , #374087)"
     boxShadow="0px 0px 6px 6px black"
@@ -56,9 +50,13 @@ import
     borderLeft="1px solid rgba(255,255,255,0.5)"  
     borderRadius="2%"
     onClick={InitialiseLogIn}
-
    >
-      <Text fontFamily="Tahoma" fontSize={{base:"xs",md:"md"}}>I have an account</Text>
+      <Text 
+      fontFamily="Tahoma" 
+      fontSize={{base:"xs",md:"md"}}>
+        I have an account
+      </Text>
+
    </Button>)
     
     const loginButton=(<Button
@@ -76,57 +74,61 @@ import
         <Text fontFamily="Tahoma" fontSize={{base:"xs",md:"md"}}>I'm new here</Text>
      </Button>)
 
-    const [formButton,setFormButton] = useState(loginButton)
+    const [formButton,setFormButton] = useState(signupButton)
 
      
   return (
-      <Flex
+     <Flex
+       
        direction="column"
        align="center"
        w="100%" 
        h="100vh" 
-       bgGradient="linear(45deg,rgba(12, 25, 50 ,0.7),rgba(12, 25, 50 ,0.2))"
+       bgGradient={{base:"linear(90deg,rgba(12, 25, 50 ,0.7),rgba(12, 25, 50 ,0.2))",md:"linear(45deg,rgba(12, 25, 50 ,0.7),rgba(12, 25, 50 ,0.2))"}}
        bgSize="200% 200%"
       > 
-     <Flex
-      direction="row"
+     <Stack
+      direction={{base:"column",md:"row"}}
       w="full"
       h="full"
       align="center"
-      justify="space-evenly"
+      justify={{base:"center",md:"space-evenly"}}
      >
+       <Image  src={Nightingale}  h="15%" w="32%" display={{base:"block",md:"none"}} mx="34%" />
       
-      <Box h={{base:"33rem",md:"35rem"}} w="45rem" textAlign="left"  >
+      <Box h={{base:"auto",md:"35rem"}} w={{base:"15rem",lg:"45rem"}} textAlign={{base:"center",md:"left"}} mt={{base:"0rem",md:"auto"}} >
         <Text  
-           fontSize={{base:"md",sm:"lg",md:"xl",lg:"6xl"}} 
+           fontSize={{base:"3xl",md:"4xl",lg:"6xl"}} 
            fontFamily="Tahoma"      
-           sx={{"animation":"Title 3s ease infinite","animationDirection":""}}
+           sx={{"animation":"Title 3s ease infinite"}}
            bgClip="text" >
              NIGHTINGALE
         </Text>
 
         <Text 
+           display={{base:"none",md:"block"}}
            fontFamily="Tahoma" 
-           fontSize="3xl" 
+           fontSize={{base:"xs",sm:"md",md:"xl",lg:"3xl"}} 
            pt="1rem" 
            color="#C0D7F1">
              Take end-to-end encryption and privacy into your own hands.
         </Text>
 
         <Text 
+           display={{base:"none",md:"block"}}
            fontFamily="Tahoma" 
-           fontSize="2xl" 
+           fontSize={{md:"lg",lg:"2xl"}} 
            pt="1rem">
              Encrypt and decrypt your chats with the widest set of cryptographic tools you'll find in one place.
         </Text>
-        <Image  src={Nightingale}  h={{md:"70%",lg:"50%"}} w={{md:"35%",lg:"50%"}} display={{base:"none",md:"flex"}} mx="25%" />
+        <Image  src={Nightingale}  h={{md:"40%",lg:"50%"}} w={{md:"60%",lg:"50%"}} display={{base:"none",md:"flex"}} mx="25%" />
       </Box>
 
       <Flex
       align="centre"
       direction="column"
       my={{base:"5rem",md:"5rem"}}
-      h={{base:"33rem",md:"35rem"}}
+      h={{base:"30rem",md:"35rem"}}
       w={{base:"15rem",sm:"25rem",lg:"30rem"}} 
       bgGradient="linear(to-r,rgba(12, 25, 50 ,0.7),rgba(12, 25, 50 ,0.2))" 
       borderRadius="5%" 
@@ -138,9 +140,11 @@ import
 
        {formButton}
 
+        
+
        
       </Flex>
-      </Flex>
+      </Stack>
      </Flex>
     
   );
