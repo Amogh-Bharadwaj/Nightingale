@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from "react";
 import {EmailIcon,ViewIcon,LockIcon} from "@chakra-ui/icons";
-import Nightingale from "../assets/Nightingale.gif"
-import SignUpForm from "../components/signupform";
-import LogInForm from "../components/loginform";
-import OTPForm from "../components/otp";
+import Nightingale from "../../assets/Nightingale.gif"
+import SignUpForm from "../../components/Auth/signupform";
+import LogInForm from "../../components/Auth/loginform";
+
 import "./landingpage.css";
 import 
 {   Flex,
@@ -54,7 +54,9 @@ import
    >
       <Text 
       fontFamily="Tahoma" 
-      fontSize={{base:"xs",md:"md"}}>
+      fontSize={{base:"xs",md:"md"}}
+      color="white"
+      >
         Log in with existing account
       </Text>
 
@@ -70,6 +72,7 @@ import
       borderTop="2px solid rgba(255,255,255,0.5)"
       borderLeft="1px solid rgba(255,255,255,0.5)"  
       borderRadius="2%" 
+      color="white"
       onClick={InitialiseSignUp}
      >
         <Text fontFamily="Tahoma" fontSize={{base:"xs",md:"md"}}>I'm new here</Text>
@@ -79,13 +82,15 @@ import
 
      
   return (
+    
      <Flex
-       
        direction="column"
        align="center"
        w="100%" 
        h="100vh" 
-       bgGradient={{base:"linear(90deg,rgba(12, 25, 50 ,0.7),rgba(12, 25, 50 ,0.2))",md:"linear(45deg,rgba(12, 25, 50 ,0.7),rgba(12, 25, 50 ,0.2))"}}
+       bgColor="black"
+       bgGradient={{base:"linear(90deg,rgba(12, 25, 50 ,0.7),rgba(12, 25, 50 ,0.2))",md:"linear(45deg,rgba(7, 10, 53,0.5),rgba(7, 10, 53,0.2))"}}
+     
        bgSize="200% 200%"
       > 
      <Stack
@@ -119,7 +124,9 @@ import
            display={{base:"none",md:"block"}}
            fontFamily="Tahoma" 
            fontSize={{md:"lg",lg:"2xl"}} 
-           pt="1rem">
+           pt="1rem"
+           color="white"
+           >
              Encrypt and decrypt your chats with the widest set of cryptographic tools you'll find in one place.
         </Text>
         <Image  src={Nightingale}  h={{md:"40%",lg:"50%"}} w={{md:"60%",lg:"50%"}} display={{base:"none",md:"flex"}} mx="25%" />
@@ -147,6 +154,7 @@ import
       </Flex>
       </Stack>
      </Flex>
+   
     
   );
 }

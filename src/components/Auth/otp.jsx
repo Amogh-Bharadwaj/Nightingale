@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import { useHistory } from "react-router-dom";
 import {CheckCircleIcon} from "@chakra-ui/icons"
 import 
 {   Flex,
@@ -16,21 +17,54 @@ import
     VStack,
 } from "@chakra-ui/react"
 
-const OTPForm=()=>{
+const OTPForm=({email,alias,password})=>{
 
     //State for user entry
     const [userOTP,setOTP] = useState("");
-
-    //State for error
+    
+    //State for form error
     const [otpErrorMessage,setOTPError] = useState("");
 
+    const history= useHistory();
+
     const getOTP=(e)=>{
+        
         setOTP(e.target.value)
     }
 
     const handleOTPSubmit=(e)=>{
-    
-        console.log("OTP submitted")
+        e.preventDefault()
+        let otpError=false;
+        let otpCheck= /[^0-9]/
+        if((userOTP.length!=6)||(otpCheck.test(userOTP)==true)){setOTPError("Invalid OTP!");otpError=true;}
+        if(otpError==true){return;}
+
+        fetch(
+          `http://127.0.0.1:5000/tail/signup/otp`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              email:email,
+              alias:alias,
+              password:password,
+              otp:userOTP
+            }),
+            headers: {
+             "Content-type": "application/json",
+          },
+          }
+        )
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            if("otpError" in json){
+              setOTPError("Incorrect OTP! Please check again")
+            }
+            else {localStorage.setItem("jwt", json.jwt)
+            console.log("JWT set")}
+            history.push("/desk");
+
+          });
 
 
     }
@@ -66,7 +100,7 @@ const OTPForm=()=>{
                 <Text
                 fontSize={{base:"sm",md:"md"}} 
                 fontFamily="Tahoma" 
-
+                color="white"
                 >
                     We've sent an OTP number to your email address. Please enter it below. 
 
@@ -75,26 +109,26 @@ const OTPForm=()=>{
 
                 
             <Box w="full">
-    
-               <Text 
+          <InputGroup>
+          <InputLeftElement children= {<CheckCircleIcon color="white"/>} />
+          <Input 
+            type="text" 
+            isInvalid={userOTP.length<6 && userOTP.length>0}
+            fontFamily="Tahoma"
+            bgColor="rgba(0,0,0,0.4)" 
+            textColor="white"
+            placeholder="Enter your OTP"
+            borderColor="rgba(255,255,255,0.2)"
+            onChange={getOTP}
+            />
+          </InputGroup>
+          <Text 
                  fontFamily="Tahoma" 
                  fontSize={{base:"xs",md:"md"}}
                  color="red.200"
                 >
               {otpErrorMessage} 
                </Text>
-             
-          <InputGroup>
-          <InputLeftElement children= {<CheckCircleIcon/>} />
-          <Input 
-            type="text" 
-            isInvalid={userOTP.length<6 && userOTP.length>0}
-            fontFamily="Tahoma"
-            bgColor="rgba(0,0,0,0.4)" 
-            placeholder="Enter your OTP"
-            onChange={getOTP}
-            />
-          </InputGroup>
           </Box>
           <Button
             mx="2rem"
@@ -104,22 +138,19 @@ const OTPForm=()=>{
             boxShadow="0px 0px 6px 6px black"
             borderTop="2px solid rgba(255,255,255,0.5)"
             borderLeft="1px solid rgba(255,255,255,0.5)"  
-            borderRadius="2%">
-            Enter
+            borderRadius="2%"
+            type="submit"
+            >
+            <Text 
+                 fontFamily="Tahoma" 
+                 fontSize={{base:"xs",md:"md"}}
+                 color="white"
+                >
+              Enter
+               </Text>
 
           </Button>
-          <Button
-            mx="2rem"
-            height={{base:"2rem",md:"3rem"}}
-            _hover={{bgColor:"none"}}
-            bgGradient="linear(to-l, #1CB0AF , #052876)"
-            boxShadow="0px 0px 6px 6px black"
-            borderTop="2px solid rgba(255,255,255,0.5)"
-            borderLeft="1px solid rgba(255,255,255,0.5)"  
-            borderRadius="2%">
-            Resend OTP
-
-          </Button>
+         
           </VStack>
           </FormControl>
         </form>

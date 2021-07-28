@@ -160,7 +160,9 @@ const SignUpForm=()=>{
           <FormLabel>
             <Text 
             fontFamily="Tahoma" 
-            fontSize={{base:"xs",md:"md"}}>
+            fontSize={{base:"xs",md:"md"}}
+            color="white"
+            >
               Email 
             </Text>
           </FormLabel>
@@ -175,12 +177,14 @@ const SignUpForm=()=>{
           </Flex>
 
           <InputGroup>
-          <InputLeftElement children= {<EmailIcon/>} />
+          <InputLeftElement children= {<EmailIcon color="white"/>} />
           <Input 
             type="email" 
             isInvalid={(!emailValidity && userEmail.length>0)}
             fontFamily="Tahoma"
             bgColor="rgba(0,0,0,0.4)" 
+            borderColor="rgba(255,255,255,0.2)"
+            textColor="white"
             placeholder="Your email ID"
             onChange={getEmail}
             />
@@ -193,7 +197,9 @@ const SignUpForm=()=>{
           <FormLabel>
             <Text 
              fontFamily="Tahoma" 
-             fontSize={{base:"xs",md:"md"}}>
+             fontSize={{base:"xs",md:"md"}}
+             color="white"
+             >
                Secret Alias
             </Text>
           </FormLabel>
@@ -207,12 +213,14 @@ const SignUpForm=()=>{
           </Flex>
 
           <InputGroup>
-          <InputLeftElement children= {<ViewIcon/>} />
+          <InputLeftElement children= {<ViewIcon color="white"/>} />
           <Input 
             type="name" 
             bgColor="rgba(0,0,0,0.4)" 
+            borderColor="rgba(255,255,255,0.2)"
             fontFamily="Tahoma"
             onChange={getAlias}
+            textColor="white"
             placeholder="Who will you be known as?"/>
           </InputGroup>
           </Box>
@@ -222,7 +230,11 @@ const SignUpForm=()=>{
           <Box w="full">
           <Flex direction="row">
           <FormLabel>
-            <Text fontFamily="Tahoma" fontSize={{base:"xs",md:"md"}}>Password</Text>
+            <Text 
+            fontFamily="Tahoma" 
+            fontSize={{base:"xs",md:"md"}}
+            color="white"
+            >Password</Text>
           </FormLabel>
           <Text 
             fontFamily="Tahoma" 
@@ -235,12 +247,14 @@ const SignUpForm=()=>{
             </Flex>
 
           <InputGroup>
-          <InputLeftElement children= {<LockIcon/>} />
+          <InputLeftElement children= {<LockIcon color="white"/>} />
           <Input 
             type="password" 
             fontFamily="Tahoma"
             bgColor="rgba(0,0,0,0.4)" 
+            borderColor="rgba(255,255,255,0.2)"
             onChange={getPassword}
+            textColor="white"
             placeholder="Keep it strong"/>
           </InputGroup>
           </Box>
@@ -251,15 +265,21 @@ const SignUpForm=()=>{
            mt={{base:"1rem",md:"2rem"}}
            h={{base:"2rem",md:"3rem"}}
            _hover={{bgColor:"none"}}
-           bgGradient="linear(to-l, rgba(102, 0, 51,0.5), red.600)"
+           bgGradient="linear(to-l, rgba(102, 0, 51,0.9), red.600)"
            boxShadow="0px 0px 6px 6px black"
            borderTop="2px solid rgba(255,255,255,0.5)"
            borderLeft="1px solid rgba(255,255,255,0.5)"  
            borderRadius="2%" 
+           
            type="submit"
            
           >
-            <Text fontFamily="Tahoma" fontSize={{base:"xs",md:"md"}}>Proceed</Text>
+            <Text 
+             fontFamily="Tahoma" 
+             fontSize={{base:"xs",md:"md"}}
+             color="white"
+             >Proceed
+             </Text>
           </Button>
 
           
@@ -272,7 +292,7 @@ const SignUpForm=()=>{
   )}
   else{
     return(
-      <OTPForm/>
+      <OTPForm email={userEmail} alias={userAlias} password={userPassword}/>
 
     )
   }
