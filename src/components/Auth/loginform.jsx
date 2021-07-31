@@ -73,11 +73,8 @@ const LogInForm=()=>{
         }
         else {localStorage.setItem("jwt", json.jwt);
         console.log("JWT set");
-        history.push("/desk");}
+        if(localStorage.getItem("jwt"))history.push("/desk");}
       });
-      
-
-    
   }
 
   return(
@@ -204,5 +201,7 @@ const LogInForm=()=>{
   
   )
 }
+
+
 
 export default LogInForm;
