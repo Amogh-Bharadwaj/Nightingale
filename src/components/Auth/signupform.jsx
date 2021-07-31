@@ -126,9 +126,11 @@ const SignUpForm=()=>{
 
   useEffect(() => {
     fetchCredentialRecords();
-    if(databaseAliases.length>0)console.log("Aliases",databaseAliases)
+    if(databaseAliases!=null){
+    if(databaseAliases.length>0){console.log("Aliases",databaseAliases)}
     if(databaseAliases.indexOf(userAlias)!=-1){setAliasError("[ Alias is taken! ]")}
     else{setAliasError("")}
+    }
   },[userAlias]);
 
   if(!otpVerified){return(

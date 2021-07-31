@@ -47,8 +47,6 @@ const LogInForm=()=>{
 
     if(userPassword.length==0){setPasswordError("[ Enter a password! ]");error=true;}
     if(error==true){console.log("Error is true");return;}
-
-    let pass=true;
     fetch(
       `http://127.0.0.1:5000/tail/login`,
       {
@@ -67,16 +65,17 @@ const LogInForm=()=>{
         console.log(json);
         if("aliasError" in json){
           setAliasError(json.aliasError);
-          pass=false;
+         
         }
         else if("passwordError" in json){
           setPasswordError(json.passwordError)
-          pass=false;
+          
         }
-        else {localStorage.setItem("jwt", json.jwt)
-        console.log("JWT set")}
+        else {localStorage.setItem("jwt", json.jwt);
+        console.log("JWT set");
+        history.push("/desk");}
       });
-      if(pass==true){history.push("/desk")}
+      
 
     
   }

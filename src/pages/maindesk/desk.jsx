@@ -1,4 +1,5 @@
 import React from "react"
+import { withRouter } from "react-router";
 
 const Desk=()=>{
     return(
@@ -6,4 +7,4 @@ const Desk=()=>{
     )
 }
 
-export default Desk;
+export default withRouter(Desk);

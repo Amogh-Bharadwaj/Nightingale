@@ -20,6 +20,22 @@ otp = randint(pow(10,5),pow(10,6)-1) #otp generation
 
 auth_blueprint = Blueprint("auth", __name__, url_prefix="/tail")
 
+@auth_blueprint.route("/logged-in")
+@jwt_optional
+def LoggedIn():
+    login_pass=False
+    userId= get_jwt_identity()
+    print("UserID:",userId)
+
+    if userId:
+        login_pass=True
+        print(login_pass)
+        return {"authPass":"true"}
+    return {"authPass":"false"}
+    
+
+
+
 @auth_blueprint.route("/user-details")
 @jwt_optional
 def EmailALiasList():
@@ -115,12 +131,13 @@ def LogIn():
     password_sql="SELECT user_id FROM users where user_alias=(%s) AND user_password=crypt(%s,user_password)"
     password_data=(alias,password,)
     cursor.execute(password_sql,password_data)
-    result = cursor.fetchall()[0]
-    if cursor.rowcount<1:
+    result = cursor.fetchall()
+    print("Fetchall login:",result)
+    if len(result) < 1:
         return {"passwordError":"Wrong password!"}
 
 
-    access_token = create_access_token(identity=result[0])
+    access_token = create_access_token(identity=result[0][0])
     return jsonify(jwt=access_token)
     
 
