@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,send_from_directory
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS, cross_origin
 from dotenv import load_dotenv, find_dotenv

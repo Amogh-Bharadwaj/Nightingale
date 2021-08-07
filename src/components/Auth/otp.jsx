@@ -61,7 +61,7 @@ const OTPForm=({email,alias,password})=>{
               setOTPError("Incorrect OTP! Please check again")
             }
             else {localStorage.setItem("jwt", json.jwt)
-            console.log("JWT set")}
+            console.log("JWT set in OTP Signup")}
             history.push("/desk");
 
           });

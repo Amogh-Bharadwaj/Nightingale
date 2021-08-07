@@ -1,7 +1,7 @@
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import PrivateRoute from "./Routes/ProtectedRoute.jsx";
 import React from "react";
 import LandingPage from "./pages/landingpage/landingpage";
 
@@ -15,7 +15,7 @@ const App=()=> {
       <Switch>
      <Route exact path="/" render={()=><LandingPage />} />
     
-     <Route exact path="/desk" render={()=> <Desk/>} /> 
+     <PrivateRoute component={Desk} path="/desk" exact />
       
      </Switch>
      </ChakraProvider>
