@@ -104,7 +104,7 @@ import
       
       <Box h={{base:"auto",md:"35rem"}} w={{base:"15rem",lg:"45rem"}} textAlign={{base:"center",md:"left"}} mt={{base:"0rem",md:"auto"}} >
         <Text  
-           fontSize={{base:"3xl",md:"4xl",lg:"6xl"}} 
+           fontSize={{base:"3xl",lg:"6xl"}} 
            fontFamily="Tahoma"      
            sx={{"animation":"Title 3s ease infinite"}}
            bgClip="text" >
