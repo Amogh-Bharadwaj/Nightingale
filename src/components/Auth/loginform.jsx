@@ -73,8 +73,9 @@ const LogInForm=()=>{
         }
         else {localStorage.setItem("jwt", json.jwt);
         console.log("JWT set");
-        if(localStorage.getItem("jwt"))history.push("/desk");}
-      });
+        if(localStorage.getItem("jwt"))history.push({pathname:"/desk",state:{"Alias":userAlias}});
+        }
+      })
   }
 
   return(

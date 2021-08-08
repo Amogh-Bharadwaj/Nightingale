@@ -1,12 +1,11 @@
-import React from "react"
-import { useState } from "react";
-import { useEffect } from "react";
-import { withRouter } from "react-router";
-import { useHistory } from "react-router";
-import { Redirect } from "react-router";
-import {ViewIcon,ArrowRightIcon,ChevronLeftIcon,ChevronRightIcon,ArrowLeftIcon} from "@chakra-ui/icons";
-import NightIcon from "../../assets/NightIcon.ico"
+import React,{useState,useContext} from "react"
 import Nightingale from "../../assets/Nightingale.gif"
+import AliasContext from "../../Contexts/AliasContext"
+import {
+    ArrowBackIcon,
+    InfoIcon,
+    EditIcon
+} from "@chakra-ui/icons"
 import {
     Flex,
     Box,
@@ -23,192 +22,143 @@ import {
     InputGroup,
     InputLeftElement,
     Input,
-    Textarea
+    Textarea,
+    Divider
 } from "@chakra-ui/react"
+import { useHistory } from "react-router-dom"
 
 const Desk=()=>{
-    
-   
-    const [chatDrawer,setChatDrawer] = useState(false);
-    const [drawerIcon,setDrawerIcon] = useState( <ArrowLeftIcon 
-        color="white"
-        //border="2px solid white"
-        boxSize={4}/>);
-    
+    const history = useHistory();
+    const aliasprop=useContext(AliasContext);
+    const alias = aliasprop.alias;
 
-    const ToggleChat=()=>{
-        setChatDrawer(!chatDrawer);
-        if(!chatDrawer){setDrawerIcon(<ArrowRightIcon 
-            color="white"
-            boxSize={4}/>);}
-        else{
-            setDrawerIcon(<ArrowLeftIcon 
-                color="white"
-                //border="2px solid white"
-                boxSize={4}/>);
-        }
-    }
-        
- 
 
    return(
     <Flex
     direction="column"
     align="center"
-    w="100vw" 
     h="100vh" 
-    bgGradient={{base:"linear(90deg,rgba(12, 25, 50 ,0.7),rgba(12, 25, 50 ,0.2))",md:"linear(to-l,rgba(8, 12, 61,1),black)"}}
-    bgSize= "200% 100%"
+    bgGradient="linear(black,rgba(23, 47, 66,1))"
+    
    > 
 
-   <Flex
-    pos="fixed"
-    bgColor="green"
-    bottom="0%"
-    right="0%"
-    bgColor="rgba(24, 31, 41,1)"
-    boxShadow="4px 4px 4px 4px rgba(42, 47, 88,0.3)"
-    borderTop="3px solid rgba(28, 29, 31,1)"
-    borderLeft="1px solid rgba(255,255,255,0.2)"
-    borderRadius="1%"
-    h="70%"
-   
-    >
-      <Button
-      _hover={{bgColor:"rgba(63, 67, 77,0.9)"}}
-      h="100%"
-      w="1vw"
-      border="2px solid black"
-      bgColor="rgba(28, 29, 31,1)"
-      _focus={{boxShadow:"none"}}
-      _selected={{bgColor:"none"}}
-      _active={{bg:"none"}}
-      onClick={ToggleChat}
-      >
-         {drawerIcon}
-      </Button>
-     
-      
-        <form>
-        <FormControl 
-          p={5} 
-          h="full">
+   <Box
+   w="full"
+   >
 
-        <VStack
-         spacing={4}
-         display={chatDrawer?"block":"none"}
-         align="center"
-         fontFamily="Tahoma"
-         textColor="rgba(255,255,255,0.5)"
-         h="full"
-         w="30vw"
-         >
-
-         <Heading 
-           as="h3"
-           
-           color="rgba(255,255,255,0.5)"
-           textAlign="center"
-         >
-             MESSENGER
-        </Heading> 
-
-        <Box w="full">
-        <FormLabel>
-            <Text
-            fontSize="lg">
-                Receiver Alias:
-            </Text>
-        </FormLabel>
-
-        <InputGroup>
-          <InputLeftElement children= {<ChevronRightIcon color="white"/>}/>
-          <Input 
-            _focus={{bg:"rgba(0,0,0,0.4)",border:"none"}}
-            _hover={{border:"none"}}
-            border="none"
-            type="name" 
-            bgColor="rgba(0,0,0,0.4)" 
-            borderColor="rgba(255,255,255,0.2)"
-            fontFamily="Tahoma"
-            //onChange={}
-            textColor="white"
-            //placeholder="Who will you be known as?" 
-            />
-        </InputGroup>
-        </Box>
-
-        <Box 
-         w="full"
-         h="35%"
-         paddingBottom={10}
-         >
-        <FormLabel>
-            <Text
-            fontSize="lg">
-                Message:
-            </Text>
-        </FormLabel>
-
-       
-          <Textarea
-             h="full"
-             resize="none"
-            _focus={{bg:"rgba(0,0,0,0.4)",border:"none"}}
-            _hover={{border:"none"}}
-            border="none"
-            type="name" 
-            bgColor="rgba(0,0,0,0.4)" 
-            borderColor="rgba(255,255,255,0.2)"
-            fontFamily="Tahoma"
-            //onChange={}
-            textColor="white"
-            //placeholder="Who will you be known as?" 
-            />
-        </Box>
-
-        <Button
-         w="full"
-         _hover={{bgGradient:"radial(rgb(5, 29, 15),rgba(23, 102, 64,0.95))",border:"none",transform:"scale(1.02)"}}
-         _focus={{border:"none"}}
-         bgColor="rgba(23, 102, 64,1)"
-         boxShadow="0 0 2px 2px rgba(0,0,0,0.5)"
-         >
-             <Text
-             fontSize="2xl"
-             color="rgba(255,255,255,0.7)"
-             >
-                 SEND
-             </Text>
-         </Button>
-         
-        <Flex
+     <Flex
         w="full"
         direction="column"
         align="center"
+        pt={3}
         >
         <Image 
          
          justifySelf="center"
          src={Nightingale}
-         boxSize="20%"
+         boxSize="6%"
          />
         </Flex>
-        
-        
-      
 
+   <Text 
+     
+     mt={2}
+    textAlign="center"
+    fontSize="5xl"
+    color="white"
+    fontFamily="Tahoma"
+    bgGradient="linear(rgba(55, 128, 212,1),rgba(28, 230, 179,0.7))"
+    bgClip="text"
+    > 
+      NIGHTINGALE
+   </Text>
 
-       
-        </VStack>
+   <Divider
+     w="50vw"
+     opacity={0.2}
+     mx="auto"
+     my={3}
+    />
 
-       
-        </FormControl>
-        </form>
+   <Text 
+    textAlign="center"
+    fontSize="4xl"
+    color="white"
+    fontFamily="Tahoma"
+    bgGradient="linear(rgba(131, 197, 247,1),rgba(57, 126, 179,0.7))"
+    bgClip="text"
+    > 
+      Welcome, {alias}.
+   </Text>
+   </Box>
    
+  
+   <Flex
+   direction="row"
+   mt={20}
+   align="center"
+   justify="center"
+   fontWeight="extrabold"
+   fontFamily="Tahoma"
+   mx="auto">
+       <Button
+         
+         w="12vw" 
+         h="16vw" 
+         _hover={{bgGradient:"linear(rgba(39, 202, 242,1),rgba(60, 136, 230,0.8))" ,transform:"scale(1.1)",transition:"transform 0.4s ease-in-out;"}}
+         bgGradient="linear(rgba(39, 202, 242,0.7),rgba(60, 136, 230,0.8))" 
+         borderRadius="4%"
+         onClick={()=>{history.push({pathname:"/space",state:{"Alias":alias}})}}
+         mx={10}>
+             <VStack>
+             <EditIcon boxSize="5em"/>
+             <Text 
+               fontSize="2xl"
+             >
+                  Workspace
+              </Text>
+             </VStack>
+         </Button>
+       
+         <Center 
+         w="12vw" 
+         h="16vw" 
+         _hover={{bgGradient:"linear(rgba(171, 135, 7,1),rgba(212, 186, 95,0.8))" ,transform:"scale(1.1)",transition:"transform 0.4s ease-in-out;"}}
+         bgGradient="linear(rgba(171, 135, 7,0.7),rgba(212, 186, 95,0.8))" 
+         borderRadius="4%"
+         mx={10}>
+             <VStack>
+             <InfoIcon boxSize="5em"/>
+             <Text 
+               fontSize="2xl"
+              >
+                  Help
+              </Text>
+             </VStack>
+         </Center>
+         <Center 
+         w="12vw" 
+         h="16vw" 
+         _hover={{bgGradient:"linear(rgba(156, 45, 65,1),rgba(222, 102, 124,0.8))",transform:"scale(1.1)",transition:"transform 0.4s ease-in-out;"}}
+         bgGradient="linear(rgba(156, 45, 65,0.7),rgba(222, 102, 124,0.8))" 
+         borderRadius="4%"
+         mx={10}>
 
-    </Flex>
+             <VStack >
+             <ArrowBackIcon boxSize="5em"/>
+             <Text 
+               fontSize="2xl"
+              >
+                  Logout
+              </Text>
+             </VStack>
+         </Center>
 
+   </Flex>
+
+  
+   
+  
    
 
 

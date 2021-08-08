@@ -5,9 +5,9 @@ import { Spinner, Center } from "@chakra-ui/react";
 
 const PrivateRoute =  ({component: Component, ...rest}) => {
     const [check,setCheck] = useState(-1);
-    AuthCheck().then((pass)=>{setCheck(pass);console.log("Auth check inside promise:",check);})
+    AuthCheck().then((pass)=>{setCheck(pass[0]);console.log("Auth check inside promise:",pass);})
     console.log("Auth check inside private route:",check);
-
+   
     const renderRoute = (props) => {
         if (check===-1) {
             return (

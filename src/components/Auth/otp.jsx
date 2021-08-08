@@ -62,7 +62,7 @@ const OTPForm=({email,alias,password})=>{
             }
             else {localStorage.setItem("jwt", json.jwt)
             console.log("JWT set in OTP Signup")}
-            history.push("/desk");
+            history.push("/desk",{"Alias":alias});
 
           });
 
