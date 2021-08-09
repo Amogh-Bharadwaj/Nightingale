@@ -51,6 +51,7 @@ const ChatDrawer=()=>{
     return(
         <Flex
         pos="fixed"
+        zIndex={10}
         bgColor="green"
         bottom="0%"
         right="0%"

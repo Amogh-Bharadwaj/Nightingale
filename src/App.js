@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./Routes/ProtectedRoute.jsx";
 import React,{useEffect,Component} from "react";
 import LandingPage from "./pages/landingpage/landingpage";
-import WorkSpace from "./pages/workspace/workspace.jsx";
 import Desk from "./pages/maindesk/desk";
 import AliasContext from "./Contexts/AliasContext.jsx";
 import AuthCheck from "./components/Auth/authcheck.jsx";
@@ -19,7 +18,7 @@ const Routing=()=> {
       <Switch>
      <Route exact path="/" render={()=><LandingPage />} />
      <PrivateRoute component={Desk} path="/desk" exact />
-     <PrivateRoute component={WorkSpace} path="/space" exact />
+     
       
      </Switch>
      </ChakraProvider>
