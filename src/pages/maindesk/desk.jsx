@@ -10,7 +10,8 @@ import {
     ChevronRightIcon,
     ViewIcon,
     SunIcon,
-    DeleteIcon
+    DeleteIcon,
+    UnlockIcon
 } from "@chakra-ui/icons"
 import {
     Flex,
@@ -147,9 +148,11 @@ const Desk=()=>{
             h="20%"
             w="full"
             fontFamily="Tahoma"
+           
             >   
               <Text
-                w="30%"
+                textAlign="center"
+                w="20%"
                 color="rgb(166, 93, 117)"
                 fontSize="3xl">
                 My Inbox
@@ -276,12 +279,171 @@ const Desk=()=>{
             </Flex> 
      </Flex>
        
-       <Box
-       h="40vh"
+      <Flex
+       direction="row"
        w="full"
-       >
-         <Text textAlign="center" mx="auto" w="50%" fontSize="6xl" color="whiteAlpha.300">ALL CRYPTO STUFF HERE ONWARDS</Text>
-       </Box>
+       
+       align="center"
+       fontFamily="Tahoma"
+       
+      >
+        <VStack
+          w="18%"
+          bgGradient="linear(rgba(0,0,0,0.6),black)"
+          p={7}
+        >
+          <Text
+            bgGradient="linear(rgb(2, 46, 59),rgb(15, 212, 153))"
+            bgClip="text"
+            fontSize="3xl"
+            fontWeight="bold"
+           >Ciphers</Text>
+          
+          <Box
+          textColor="white"
+          pt={5}
+          >
+          <List spacing={5}>
+            <ListItem>
+              <Text
+               color="rgb(8, 171, 252)"
+              >
+                Symmetric Ciphers
+              </Text>
+
+               <Box
+               pl={5}
+              >
+                <List spacing={2}>
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">AES</Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">DES</Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">Triple DES</Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">Blowfish</Link>
+                  </ListItem>
+
+                </List>
+              </Box>
+            </ListItem>
+
+            <ListItem>
+              <Text
+               color="rgb(8, 171, 252)"
+              >
+                Asymmetric and Other Schemes
+              </Text>
+
+               <Box
+               pl={5}
+              >
+                <List spacing={2}>
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">RSA</Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">Diffie-Hellman</Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">ECC</Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">Shamir's Scheme</Link>
+                  </ListItem>
+
+                </List>
+              </Box>
+            </ListItem>
+
+
+            <ListItem>
+              <Text
+               color="rgb(8, 171, 252)"
+              >
+                Classics
+              </Text>
+
+               <Box
+               pl={5}
+              >
+                <List spacing={2}>
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">Caesar</Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">Vigenere</Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">Playfair</Link>
+                  </ListItem>
+
+                </List>
+              </Box>
+            </ListItem>
+
+            <ListItem>
+              <Text
+               color="rgb(8, 171, 252)"
+              >
+                Hashes
+              </Text>
+
+               <Box
+               pl={5}
+              >
+                <List spacing={2}>
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">MD5</Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">SHA Family</Link>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListIcon as={UnlockIcon} color="white.600" />
+                    <Link variant="ghost">Blake Family</Link>
+                  </ListItem>
+
+                </List>
+              </Box>
+            </ListItem>
+
+
+          </List>
+          </Box>
+
+
+        </VStack>
+      </Flex>
+
+      
 
 </Flex> 
     )
