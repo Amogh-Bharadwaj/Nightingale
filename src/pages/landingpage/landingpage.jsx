@@ -53,7 +53,7 @@ import
     onClick={InitialiseLogIn}
    >
       <Text 
-      fontFamily="Tahoma" 
+      fontFamily="monospace" 
       fontSize={{base:"xs",md:"md"}}
       color="white"
       >
@@ -75,7 +75,7 @@ import
       color="white"
       onClick={InitialiseSignUp}
      >
-        <Text fontFamily="Tahoma" fontSize={{base:"xs",md:"md"}}>I'm new here</Text>
+        <Text fontFamily="monospace" fontSize={{base:"xs",md:"md"}}>I'm new here</Text>
      </Button>)
 
     const [formButton,setFormButton] = useState(signupButton)
@@ -105,7 +105,7 @@ import
       <Box h={{base:"auto",md:"35rem"}} w={{base:"15rem",lg:"45rem"}} textAlign={{base:"center",md:"left"}} mt={{base:"0rem",md:"auto"}} >
         <Text  
            fontSize={{base:"3xl",lg:"6xl"}} 
-           fontFamily="Tahoma"      
+           fontFamily="monospace"      
            sx={{"animation":"Title 3s ease infinite"}}
            bgClip="text" >
              NIGHTINGALE
@@ -113,7 +113,7 @@ import
 
         <Text 
            display={{base:"none",md:"block"}}
-           fontFamily="Tahoma" 
+           fontFamily="monospace" 
            fontSize={{base:"xs",sm:"md",md:"xl",lg:"3xl"}} 
            pt="1rem" 
            color="#C0D7F1">
@@ -122,7 +122,7 @@ import
 
         <Text 
            display={{base:"none",md:"block"}}
-           fontFamily="Tahoma" 
+           fontFamily="monospace" 
            fontSize={{md:"lg",lg:"2xl"}} 
            pt="1rem"
            color="white"

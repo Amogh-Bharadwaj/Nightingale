@@ -145,7 +145,7 @@ const SignUpForm=()=>{
            <Box w="full" >
             <Text 
              fontSize={{base:"sm",md:"2xl"}} 
-             fontFamily="Tahoma" 
+             fontFamily="monospace" 
              textAlign="center"
              bgGradient={{base:"linear(to-l,white,white)",md:"linear(to-l, #0A114B,white)"}}
              bgClip="text"
@@ -161,7 +161,7 @@ const SignUpForm=()=>{
           <Flex direction="row">
           <FormLabel>
             <Text 
-            fontFamily="Tahoma" 
+            fontFamily="monospace" 
             fontSize={{base:"xs",md:"md"}}
             color="white"
             >
@@ -169,7 +169,7 @@ const SignUpForm=()=>{
             </Text>
           </FormLabel>
           <Text 
-            fontFamily="Tahoma" 
+            fontFamily="monospace" 
             fontSize={{base:"xs",md:"md"}}
             color="red.200"
             >
@@ -183,7 +183,7 @@ const SignUpForm=()=>{
           <Input 
             type="email" 
             isInvalid={(!emailValidity && userEmail.length>0)}
-            fontFamily="Tahoma"
+            fontFamily="monospace"
             bgColor="rgba(0,0,0,0.4)" 
             borderColor="rgba(255,255,255,0.2)"
             textColor="white"
@@ -198,7 +198,7 @@ const SignUpForm=()=>{
           <Flex direction="row">
           <FormLabel>
             <Text 
-             fontFamily="Tahoma" 
+             fontFamily="monospace" 
              fontSize={{base:"xs",md:"md"}}
              color="white"
              >
@@ -206,7 +206,7 @@ const SignUpForm=()=>{
             </Text>
           </FormLabel>
           <Text 
-            fontFamily="Tahoma" 
+            fontFamily="monospace" 
             fontSize={{base:"xs",md:"md"}}
             color="red.200"
             >
@@ -220,7 +220,7 @@ const SignUpForm=()=>{
             type="name" 
             bgColor="rgba(0,0,0,0.4)" 
             borderColor="rgba(255,255,255,0.2)"
-            fontFamily="Tahoma"
+            fontFamily="monospace"
             onChange={getAlias}
             textColor="white"
             placeholder="Who will you be known as?"/>
@@ -233,13 +233,13 @@ const SignUpForm=()=>{
           <Flex direction="row">
           <FormLabel>
             <Text 
-            fontFamily="Tahoma" 
+            fontFamily="monospace" 
             fontSize={{base:"xs",md:"md"}}
             color="white"
             >Password</Text>
           </FormLabel>
           <Text 
-            fontFamily="Tahoma" 
+            fontFamily="monospace" 
             fontSize={{base:"xs",md:"md"}}
             color="red.200"
             >
@@ -252,7 +252,7 @@ const SignUpForm=()=>{
           <InputLeftElement children= {<LockIcon color="white"/>} />
           <Input 
             type="password" 
-            fontFamily="Tahoma"
+            fontFamily="monospace"
             bgColor="rgba(0,0,0,0.4)" 
             borderColor="rgba(255,255,255,0.2)"
             onChange={getPassword}
@@ -277,7 +277,7 @@ const SignUpForm=()=>{
            
           >
             <Text 
-             fontFamily="Tahoma" 
+             fontFamily="monospace" 
              fontSize={{base:"xs",md:"md"}}
              color="white"
              >Proceed

@@ -87,7 +87,7 @@ const ChatDrawer=()=>{
              spacing={4}
              display={chatDrawer?"block":"none"}
              align="center"
-             fontFamily="Tahoma"
+             fontFamily="monospace"
              textColor="rgba(255,255,255,0.5)"
              h="full"
              w="30vw"
@@ -119,7 +119,7 @@ const ChatDrawer=()=>{
                 type="name" 
                 bgColor="rgba(0,0,0,0.4)" 
                 borderColor="rgba(255,255,255,0.2)"
-                fontFamily="Tahoma"
+                fontFamily="monospace"
                 textColor="white" 
                 />
             </InputGroup>
@@ -147,7 +147,7 @@ const ChatDrawer=()=>{
                 type="name" 
                 bgColor="rgba(0,0,0,0.4)" 
                 borderColor="rgba(255,255,255,0.2)"
-                fontFamily="Tahoma"
+                fontFamily="monospace"
                 textColor="white"
                 />
             </Box>

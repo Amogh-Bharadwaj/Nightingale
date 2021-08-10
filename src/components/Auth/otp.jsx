@@ -82,7 +82,7 @@ const OTPForm=({email,alias,password})=>{
             <Box w="full" >
             <Text 
              fontSize={{base:"sm",md:"2xl"}} 
-             fontFamily="Tahoma" 
+             fontFamily="monospace" 
              textAlign="center"
              bgGradient={{base:"linear(to-l,white,white)",md:"linear(to-l, #0A114B,white)"}}
              bgClip="text"
@@ -99,7 +99,7 @@ const OTPForm=({email,alias,password})=>{
               >
                 <Text
                 fontSize={{base:"sm",md:"md"}} 
-                fontFamily="Tahoma" 
+                fontFamily="monospace" 
                 color="white"
                 >
                     We've sent an OTP number to your email address. Please enter it below. 
@@ -114,7 +114,7 @@ const OTPForm=({email,alias,password})=>{
           <Input 
             type="text" 
             isInvalid={userOTP.length<6 && userOTP.length>0}
-            fontFamily="Tahoma"
+            fontFamily="monospace"
             bgColor="rgba(0,0,0,0.4)" 
             textColor="white"
             placeholder="Enter your OTP"
@@ -123,7 +123,7 @@ const OTPForm=({email,alias,password})=>{
             />
           </InputGroup>
           <Text 
-                 fontFamily="Tahoma" 
+                 fontFamily="monospace" 
                  fontSize={{base:"xs",md:"md"}}
                  color="red.200"
                 >
@@ -142,7 +142,7 @@ const OTPForm=({email,alias,password})=>{
             type="submit"
             >
             <Text 
-                 fontFamily="Tahoma" 
+                 fontFamily="monospace" 
                  fontSize={{base:"xs",md:"md"}}
                  color="white"
                 >

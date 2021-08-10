@@ -36,7 +36,7 @@ class App extends Component{
 
   getAlias=()=>{
     AuthCheck().then((pass)=>{
-      if(pass[0]===1){this.setState({alias:pass[1]});}
+      if(pass!=null && pass[0]===1){this.setState({alias:pass[1]});}
       console.log(this.state.alias);
   })
   }

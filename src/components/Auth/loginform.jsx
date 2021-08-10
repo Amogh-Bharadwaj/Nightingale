@@ -90,7 +90,7 @@ const LogInForm=()=>{
           <Box w="full" >
             <Text 
              fontSize={{base:"sm",md:"2xl"}} 
-             fontFamily="Tahoma" 
+             fontFamily="monospace" 
              textAlign="center"
              bgGradient={{base:"linear(to-l,white,white)",md:"linear(to-l, #0A114B,white)"}}
              bgClip="text"
@@ -105,7 +105,7 @@ const LogInForm=()=>{
             <Flex direction="row">
           <FormLabel>
             <Text 
-            fontFamily="Tahoma" 
+            fontFamily="monospace" 
             fontSize={{base:"xs",md:"md"}}
             color="white"
             >
@@ -113,7 +113,7 @@ const LogInForm=()=>{
             </Text>
           </FormLabel>
           <Text 
-            fontFamily="Tahoma" 
+            fontFamily="monospace" 
             fontSize={{base:"xs",md:"md"}}
             color="red.200"
             >
@@ -124,7 +124,7 @@ const LogInForm=()=>{
           <InputGroup>
           <InputLeftElement children= {<ViewIcon color="white"/>} />
           <Input 
-            fontFamily="Tahoma"
+            fontFamily="monospace"
             type="name" 
             textColor="white"
             borderColor="rgba(255,255,255,0.2)"
@@ -139,7 +139,7 @@ const LogInForm=()=>{
           <FormLabel>
            
             <Text 
-            fontFamily="Tahoma" 
+            fontFamily="monospace" 
             fontSize={{base:"xs",md:"md"}} 
             color="white">
               Password
@@ -147,7 +147,7 @@ const LogInForm=()=>{
            
           </FormLabel>
           <Text 
-            fontFamily="Tahoma" 
+            fontFamily="monospace" 
             fontSize={{base:"xs",md:"md"}}
             color="red.200"
             >
@@ -159,7 +159,7 @@ const LogInForm=()=>{
           <InputGroup>
           <InputLeftElement children= {<LockIcon color="white"/>} />
           <Input 
-            fontFamily="Tahoma"
+            fontFamily="monospace"
             type="password" 
             textColor="white"
             borderColor="rgba(255,255,255,0.2)"
@@ -183,7 +183,7 @@ const LogInForm=()=>{
            type="submit"
           >
             <Text 
-            fontFamily="Tahoma" 
+            fontFamily="monospace" 
             fontSize={{base:"xs",md:"md"}} 
             color="white"
             >

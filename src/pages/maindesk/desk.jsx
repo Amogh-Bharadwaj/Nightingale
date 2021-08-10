@@ -34,7 +34,16 @@ import {
     List,
     ListIcon,
     ListItem,
-    Link
+    Link,
+    Table,
+    Thead,
+    Tbody,
+    Tfoot,
+    Tr,
+    Th,
+    Td,
+    TableCaption,
+    HStack,
 } from "@chakra-ui/react"
 import { useHistory } from "react-router-dom"
 
@@ -98,7 +107,7 @@ const Desk=()=>{
            textAlign="center"
            fontSize="5xl"
            color="white"
-           fontFamily="Tahoma"
+           fontFamily="monospace"
            bgGradient="linear(rgba(55, 128, 212,1),rgba(28, 230, 179,0.7))"
            bgClip="text"
            > 
@@ -116,7 +125,7 @@ const Desk=()=>{
             textAlign="center"
             fontSize="4xl"
             color="white"
-            fontFamily="Tahoma"
+            fontFamily="monospace"
             bgGradient="linear(rgba(131, 197, 247,1),rgba(57, 126, 179,0.7))"
             bgClip="text"
           > 
@@ -147,7 +156,7 @@ const Desk=()=>{
             dir="row"
             h="20%"
             w="full"
-            fontFamily="Tahoma"
+            fontFamily="monospace"
            
             >   
               <Text
@@ -175,7 +184,7 @@ const Desk=()=>{
              direction="row"
              align="center"
              h="80%"
-             fontFamily="Tahoma"
+             fontFamily="monospace"
              w="full" 
             > 
                 <VStack
@@ -212,50 +221,59 @@ const Desk=()=>{
                  w="70%"
                  mt={5}
                  p={10}
-                 fontFamily="Tahoma"
+                 fontFamily="monospace"
                  textColor="whiteAlpha.700"
                  bgColor="rgba(38, 18, 31,0.6)">
 
-                  <Box
-                   w="20%"
-                   h="100%"
-                   rounded="5%"
-                   bgGradient="linear(rgb(6, 8, 7),rgb(14, 29, 41))"
-                   boxShadow="0px 0px 1px 1px white"
-                   >
-                     <VStack
-                       spacing={5}
-                       align="center"
-                       p={4}
-                     >
-                       <Text
-                         align="center"
-                         fontSize="sm"
-                        >
-                          FROM: ALICE
-                        </Text>
+                     <Table variant="simple">
+                       <Thead>
+                         <Tr>
+                           <Th>Time</Th>
+                           <Th>Alias</Th>
+                           <Th>Read</Th>
+                           <Th>Star</Th>
+                           <Th>Delete</Th>
+                         </Tr>
+                       </Thead>
+                       
+                       <Tbody>
+                         <Tr>
+                           <Td>27th October, 8:07</Td>
+                           <Td>Alice</Td>
+                           <Td>
+                              <Button
+                                 size="sm"
+                                 bgColor="green.700"
+                                 _hover={{bgColor:"green.800"}}
+                              >
+                                  <ViewIcon color="white"/>
+                              </Button>
+                           </Td>
+                            
+                            <Td>
+                             <Button
+                                 size="sm"
+                                 bgColor="yellow.700"
+                                 _hover={{bgColor:"yellow.800"}}
+                              >
+                                  <SunIcon color="white"/>
+                              </Button>
+                            </Td>
+                                
+                            <Td>
+                              <Button
+                                 size="sm"
+                                 bgColor="red.700"
+                                 _hover={{bgColor:"red.800"}}
+                                >
+                                  <DeleteIcon color="white"/>
+                              </Button>
+                            </Td>
+                         </Tr>
+                       </Tbody>
+                     </Table>
 
-                        <Button
-                          mt={5}
-                          _hover={{bgColor:"green.800"}}
-                          size="sm"
-                          bgColor="green.700"
-                          ><ViewIcon color="white"/></Button>
-
-                         <Button
-                          _hover={{bgColor:"yellow.800"}}
-                          size="sm"
-                          bgColor="yellow.500"
-                          ><SunIcon color="white"/></Button>
-
-                        <Button
-                          size="sm"
-                          _hover={{bgColor:"red.800"}}
-                          bgColor="red.500"
-                          ><DeleteIcon color="white"/></Button>
-
-                     </VStack>
-                   </Box>
+                  
                  
                  </Box>
                  <Box
@@ -284,7 +302,7 @@ const Desk=()=>{
        w="full"
        
        align="center"
-       fontFamily="Tahoma"
+       fontFamily="monospace"
        
       >
         <VStack
@@ -345,6 +363,8 @@ const Desk=()=>{
               >
                 Asymmetric and Other Schemes
               </Text>
+              
+
 
                <Box
                pl={5}
