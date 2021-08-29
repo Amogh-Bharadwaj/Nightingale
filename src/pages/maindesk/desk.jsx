@@ -1,7 +1,8 @@
 import React,{useState,useContext} from "react"
 import Nightingale from "../../assets/Nightingale.gif"
-import AliasContext from "../../Contexts/AliasContext"
+
 import ChatDrawer from "../../components/Chat/ChatDrawer";
+import AES from "../../components/Ciphers/AES";
 import {
     ArrowBackIcon,
     InfoIcon,
@@ -47,11 +48,9 @@ import {
 } from "@chakra-ui/react"
 import { useHistory } from "react-router-dom"
 
-const Desk=()=>{
+const Desk=(props)=>{
     const history = useHistory();
-    const aliasprop=useContext(AliasContext);
-    const alias = aliasprop.alias;
-
+    const alias = props.location.state.Alias;
 
    return(
     
@@ -161,7 +160,7 @@ const Desk=()=>{
             >   
               <Text
                 textAlign="center"
-                w="20%"
+                w="30%"
                 color="rgb(166, 93, 117)"
                 fontSize="3xl">
                 My Inbox
@@ -189,7 +188,7 @@ const Desk=()=>{
             > 
                 <VStack
                 align="center"
-                w="20%"
+                w="25%"
                 h="full"
                 pt={5}
                 >
@@ -245,6 +244,7 @@ const Desk=()=>{
                                  size="sm"
                                  bgColor="green.700"
                                  _hover={{bgColor:"green.800"}}
+                                 _focus={{bgColor:"green.700"}}
                               >
                                   <ViewIcon color="white"/>
                               </Button>
@@ -255,6 +255,7 @@ const Desk=()=>{
                                  size="sm"
                                  bgColor="yellow.700"
                                  _hover={{bgColor:"yellow.800"}}
+                                 _focus={{bgColor:"yellow.700"}}
                               >
                                   <SunIcon color="white"/>
                               </Button>
@@ -265,6 +266,7 @@ const Desk=()=>{
                                  size="sm"
                                  bgColor="red.700"
                                  _hover={{bgColor:"red.800"}}
+                                 _focus={{bgColor:"red.700"}}
                                 >
                                   <DeleteIcon color="white"/>
                               </Button>
@@ -284,11 +286,12 @@ const Desk=()=>{
                    bgGradient="linear(rgba(115, 30, 58,0.9),rgba(38, 18, 31,0.9))"
                    >
                      <Text
+                     mt={5}
                       fontSize="2xl"
                       textAlign="center"
                       fontWeight="bold"
                      >
-                        Reading Area
+                        Reading Desk
                      </Text>
                       
                    </Box>
@@ -301,12 +304,12 @@ const Desk=()=>{
        direction="row"
        w="full"
        
-       align="center"
+       //align="center"
        fontFamily="monospace"
        
       >
         <VStack
-          w="18%"
+          w="25%"
           bgGradient="linear(rgba(0,0,0,0.6),black)"
           p={7}
         >
@@ -461,6 +464,15 @@ const Desk=()=>{
 
 
         </VStack>
+
+        <Box 
+         w="full" 
+         h="full"
+         p={10}
+         //bgColor="green"
+         >
+           <AES />
+        </Box>
       </Flex>
 
       
