@@ -2,7 +2,7 @@ import React,{useState,useContext} from "react"
 import Nightingale from "../../assets/Nightingale.gif"
 
 import ChatDrawer from "../../components/Chat/ChatDrawer";
-import AES from "../../components/Ciphers/AES";
+import CipherForm from "../../components/Ciphers/CipherForm";
 import {
     ArrowBackIcon,
     InfoIcon,
@@ -52,6 +52,8 @@ const Desk=(props)=>{
     const history = useHistory();
     const alias = props.location.state.Alias;
 
+    const [cipher,setCipher]=useState("AES")
+
    return(
     
 <Flex
@@ -63,22 +65,25 @@ const Desk=(props)=>{
     <ChatDrawer/>
     <Button
       pos="absolute"
+      variant={{base:"ghost",md:"solid"}}
+      zIndex={1}
       mr={5}
       mt={5}
       top="0%"
       right="0%"
       w="5%"
-      h="5vw"
+      h={{base:"20vw",md:"5vw"}}
       _hover={{bgGradient:"linear(rgba(156, 45, 65,0.5),rgba(222, 102, 124,1))"}}
       _focus={{bgGradient:"linear(rgba(156, 45, 65,0.5),rgba(222, 102, 124,1))"}}
       _selected={{bgGradient:"linear(rgba(156, 45, 65,0.5),rgba(222, 102, 124,1))"}}
-      bgGradient="linear(rgba(156, 45, 65,1),rgba(222, 102, 124,1))" 
+      bgGradient={{md:"linear(rgba(156, 45, 65,1),rgba(222, 102, 124,1))"}}
       justify="center"
     >
                 <VStack >
-                    <ArrowBackIcon boxSize="1.5em"/>
+                    <ArrowBackIcon boxSize="1.5em" color="white"/>
                       <Text 
-                        fontSize="sm"
+                        fontSize="xs"
+                        display={{base:"none",md:"block"}}
                       >
                          Log out
                       </Text>
@@ -97,14 +102,14 @@ const Desk=(props)=>{
           justifySelf="center"
           src={Nightingale}
           h="30%"
-          w="6%"
+          w={{base:"25%",md:"6%"}}
           />
         
 
           <Text 
            //mt={2}
            textAlign="center"
-           fontSize="5xl"
+           fontSize={{base:"3xl",md:"4xl",lg:"5xl"}}
            color="white"
            fontFamily="monospace"
            bgGradient="linear(rgba(55, 128, 212,1),rgba(28, 230, 179,0.7))"
@@ -122,7 +127,7 @@ const Desk=(props)=>{
 
           <Text 
             textAlign="center"
-            fontSize="4xl"
+            fontSize={{base:"2xl",md:"4xl"}}
             color="white"
             fontFamily="monospace"
             bgGradient="linear(rgba(131, 197, 247,1),rgba(57, 126, 179,0.7))"
@@ -135,11 +140,11 @@ const Desk=(props)=>{
   
    </Flex>
    
-   <Flex
+   <Stack
+       direction={{base:"column",md:"row"}}
        mt={20}
        w="full"
-       direction="row"
-       h="60vh"
+       h="50vh"
        bgGradient="linear(-45deg,rgba(38, 18, 31,0.7),black)"
        textColor="white"
        >   
@@ -149,53 +154,36 @@ const Desk=(props)=>{
         w="full"
         h="full"
         align="center"
-        p={7}
+        p={{base:2,md:7}}
         > 
-            <Flex
-            dir="row"
-            h="20%"
-            w="full"
-            fontFamily="monospace"
-           
-            >   
-              <Text
-                textAlign="center"
-                w="30%"
-                color="rgb(166, 93, 117)"
-                fontSize="3xl">
-                My Inbox
-              </Text>
+            
 
-              <InputGroup >
-               <InputLeftElement
-                 pointerEvents="none"
-                 children={<SearchIcon color="white"/>}
-               />
-                   <Input 
-                     type="text" 
-                      w="50%"
-                      placeholder="Search for an alias.."
-                      />
-              </InputGroup>
-            </Flex> 
-
-            <Flex
-             direction="row"
-             align="center"
+            <Stack
+             direction={{base:"column",md:"row"}}
+             align={{md:"center"}}
              h="80%"
              fontFamily="monospace"
              w="full" 
             > 
-                <VStack
-                align="center"
-                w="25%"
+                <Stack
+                direction={{base:"row",md:"column"}}
+                align={{md:"center"}}
+                w={{base:"full",md:"23%"}}
                 h="full"
+                display={{base:"none",md:"block"}}
                 pt={5}
                 >
-                    <List spacing={5}>
+                    <Text
+                      textAlign="center"
+                      w="full"
+                      color="rgb(166, 93, 117)"
+                      fontSize={{base:"2xl",md:"3xl"}}>
+                          Inbox
+                    </Text>
+                    <List spacing={5} fontSize={{md:"md"}} >
                         <ListItem>
                           <ListIcon as={ChevronRightIcon} color="white"/>
-                          <Link variant="ghost">All</Link> 
+                          <Link variant="ghost" >All</Link> 
                         </ListItem>
 
                         <ListItem>
@@ -213,18 +201,26 @@ const Desk=(props)=>{
                           <Link variant="ghost">Trash</Link> 
                         </ListItem>                        
                     </List>
-                </VStack>
+                </Stack>
 
                 <Box 
                  h="full"
-                 w="70%"
+                 w={{base:"full",md:"70%"}}
                  mt={5}
-                 p={10}
+                 p={{base:0,md:10}}
                  fontFamily="monospace"
                  textColor="whiteAlpha.700"
                  bgColor="rgba(38, 18, 31,0.6)">
 
-                     <Table variant="simple">
+                   <InputGroup mb={4}>
+                    <InputLeftElement
+                      children={<SearchIcon color="white"/>}
+                      pointerEvents="none"
+                    />
+                    <Input w={{base:"full",md:"100%"}} placeholder="Search alias.." />
+                   </InputGroup>
+
+                     <Table variant="simple" display={{base:"none",md:"block"}}>
                        <Thead>
                          <Tr>
                            <Th>Time</Th>
@@ -275,12 +271,15 @@ const Desk=(props)=>{
                        </Tbody>
                      </Table>
 
+                     
+
+
                   
                  
                  </Box>
                  <Box
                    mt={5}
-                   w="30%"
+                   w={{base:"full",md:"30%"}}
                    h="full"
                    textColor="whiteAlpha.500"
                    bgGradient="linear(rgba(115, 30, 58,0.9),rgba(38, 18, 31,0.9))"
@@ -295,13 +294,13 @@ const Desk=(props)=>{
                      </Text>
                       
                    </Box>
-            </Flex> 
+            </Stack> 
 
             </Flex> 
-     </Flex>
+     </Stack>
        
-      <Flex
-       direction="row"
+      <Stack
+       direction={{base:"column",md:"row"}}
        w="full"
        
        //align="center"
@@ -309,7 +308,7 @@ const Desk=(props)=>{
        
       >
         <VStack
-          w="25%"
+          w={{base:"full",md:"25%"}}
           bgGradient="linear(rgba(0,0,0,0.6),black)"
           p={7}
         >
@@ -338,22 +337,32 @@ const Desk=(props)=>{
                 <List spacing={2}>
                   <ListItem>
                     <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">AES</Link>
+                      <Link 
+                        variant="ghost"
+                        onClick={()=>{setCipher("AES")}}
+                      >
+                        AES
+                      </Link>
                   </ListItem>
 
                   <ListItem>
                     <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">DES</Link>
+                      <Link 
+                        variant="ghost"
+                        onClick={()=>{setCipher("DES")}}
+                      >
+                          DES
+                      </Link>
                   </ListItem>
 
                   <ListItem>
                     <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">Triple DES</Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">Blowfish</Link>
+                      <Link 
+                        variant="ghost"
+                        onClick={()=>{setCipher("Triple DES")}}
+                      >
+                        Triple DES
+                      </Link>
                   </ListItem>
 
                 </List>
@@ -375,24 +384,35 @@ const Desk=(props)=>{
                 <List spacing={2}>
                   <ListItem>
                     <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">RSA</Link>
+                    <Link 
+                        variant="ghost"
+                        onClick={()=>{setCipher("RSA")}}
+                      >
+                        RSA
+                      </Link>
                   </ListItem>
 
                   <ListItem>
                     <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">Diffie-Hellman</Link>
+                    <Link 
+                        variant="ghost"
+                        onClick={()=>{setCipher("Diffie-Hellman")}}
+                      >
+                        Diffie-Hellman
+                      </Link>
                   </ListItem>
 
                   <ListItem>
                     <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">ECC</Link>
+                    <Link 
+                        variant="ghost"
+                        onClick={()=>{setCipher("ECC")}}
+                      >
+                        ECC
+                      </Link>
                   </ListItem>
 
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">Shamir's Scheme</Link>
-                  </ListItem>
-
+                
                 </List>
               </Box>
             </ListItem>
@@ -411,52 +431,38 @@ const Desk=(props)=>{
                 <List spacing={2}>
                   <ListItem>
                     <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">Caesar</Link>
+                    <Link 
+                        variant="ghost"
+                        onClick={()=>{setCipher("Caesar Cipher")}}
+                      >
+                        Caesar Cipher
+                      </Link>
                   </ListItem>
 
                   <ListItem>
                     <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">Vigenere</Link>
+                    <Link 
+                        variant="ghost"
+                        onClick={()=>{setCipher("Vigenere Cipher")}}
+                      >
+                        Vigenere Cipher
+                      </Link>
                   </ListItem>
 
                   <ListItem>
                     <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">Playfair</Link>
+                    <Link 
+                        variant="ghost"
+                        onClick={()=>{setCipher("Playfair Cipher")}}
+                      >
+                        Playfair Cipher
+                      </Link>
                   </ListItem>
 
                 </List>
               </Box>
             </ListItem>
 
-            <ListItem>
-              <Text
-               color="rgb(8, 171, 252)"
-              >
-                Hashes
-              </Text>
-
-               <Box
-               pl={5}
-              >
-                <List spacing={2}>
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">MD5</Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">SHA Family</Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link variant="ghost">Blake Family</Link>
-                  </ListItem>
-
-                </List>
-              </Box>
-            </ListItem>
 
 
           </List>
@@ -471,9 +477,9 @@ const Desk=(props)=>{
          p={10}
          //bgColor="green"
          >
-           <AES />
+           <CipherForm cipher={cipher} />
         </Box>
-      </Flex>
+      </Stack>
 
       
 

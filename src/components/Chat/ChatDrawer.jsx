@@ -60,7 +60,7 @@ const ChatDrawer=()=>{
         borderTop="3px solid rgba(28, 29, 31,1)"
         borderLeft="1px solid rgba(255,255,255,0.2)"
         borderRadius="1%"
-        h="70%"
+        h={{base:"60%",md:"60%",lg:"70%"}}
        
         >
           <Button
@@ -90,17 +90,17 @@ const ChatDrawer=()=>{
              fontFamily="monospace"
              textColor="rgba(255,255,255,0.5)"
              h="full"
-             w="30vw"
+             w={{base:"50vw",md:"30vw"}}
              >
     
-             <Heading 
+             <Text
                as="h3"
-               
+               fontSize={{base:"2xl",md:"4xl"}}
                color="rgba(255,255,255,0.5)"
                textAlign="center"
              >
                  MESSENGER
-            </Heading> 
+            </Text> 
     
             <Box w="full">
             <FormLabel>
@@ -166,19 +166,7 @@ const ChatDrawer=()=>{
                      SEND
                  </Text>
              </Button>
-             
-             <Flex
-            w="full"
-            direction="column"
-            align="center"
-            >
-            <Image 
-             
-             justifySelf="center"
-             src={Nightingale}
-             boxSize="20%"
-             />
-            </Flex>
+            
             </VStack>
             </FormControl>
             </form>
