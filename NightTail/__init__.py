@@ -16,7 +16,7 @@ from NightTail.messaging import messaging_blueprint
 
 def create_app():
 
-    app = Flask(__name__,static_folder='../public',static_url_path='')
+    app = Flask(__name__,static_folder='../build',static_url_path='')
     load_dotenv(find_dotenv())
     app.config["JWT_SECRET_KEY"] = os.getenv("JWT_KEY")
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = 24 * 60 * 60
