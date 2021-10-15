@@ -32,7 +32,9 @@ def LoggedIn():
         alias_sql="SELECT json_build_object('userAlias',user_alias) FROM users WHERE user_id=(%s)"
         alias_data=(userId,)
         cursor.execute(alias_sql,alias_data)
-        alias=cursor.fetchall()[0][0]["userAlias"]
+        result = cursor.fetchall()
+        print("Result: ",result)
+        alias=result[0][0]["userAlias"]
         
         print(login_pass,alias)
         return {"authPass":"true","alias":str(alias)}

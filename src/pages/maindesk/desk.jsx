@@ -1,6 +1,5 @@
-import React,{useState,useContext} from "react"
+import React,{useState,useContext, useEffect} from "react"
 import Nightingale from "../../assets/Nightingale.gif"
-
 import ChatDrawer from "../../components/Chat/ChatDrawer";
 import CipherForm from "../../components/Ciphers/CipherForm";
 import {
@@ -30,6 +29,7 @@ import {
     InputGroup,
     InputLeftElement,
     Input,
+    Spinner,
     Textarea,
     Divider,
     List,
@@ -54,15 +54,46 @@ const Desk=(props)=>{
 
     const [cipher,setCipher]=useState("AES")
 
+    const [readArea,setReadArea] = useState("");
+
+    //const messages = [['Alucard', 'PostgreSQL can store the representation of an “infinite” date, timestamp, or interval. Infinite dates are not available to Python', '10th Oct 2008'], ['Alucard', 'PostgreSQL can store the representation of an “infinite” date, timestamp, or interval. Infinite dates are not available to Python', '10th Oct 2008'], ['Alucard', 'PostgreSQL can store the representation of an “infinite” date, timestamp, or interval. Infinite dates are not available to Python', '10th Oct 2008']]
+    const [messages,setMessages]=useState([])
+   
+
+    const getInbox=()=>{
+      fetch(
+        `http://127.0.0.1:5000/tail/get-inbox`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            alias:alias,
+           
+          }),
+          headers: {
+           "Content-type": "application/json",
+        },
+        }
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          console.log("message results: ",json);
+          setMessages(json.Messages)
+        })
+    }
+   
+    useEffect(()=>{
+      getInbox();
+    },[])
+  if(messages.length>0){
    return(
     
 <Flex
   direction="column"
   align="center"
-  bgGradient="linear(black,rgba(23, 47, 66,1))"
+  bgGradient="linear(45deg,black,#172334)"
 > 
 
-    <ChatDrawer/>
+    <ChatDrawer alias={alias} />
     <Button
       pos="absolute"
       variant={{base:"ghost",md:"solid"}}
@@ -80,7 +111,7 @@ const Desk=(props)=>{
       justify="center"
     >
                 <VStack >
-                    <ArrowBackIcon boxSize="1.5em" color="white"/>
+                    <ArrowBackIcon boxSize="1.5em" color="black"/>
                       <Text 
                         fontSize="xs"
                         display={{base:"none",md:"block"}}
@@ -210,7 +241,9 @@ const Desk=(props)=>{
                  p={{base:0,md:10}}
                  fontFamily="monospace"
                  textColor="whiteAlpha.700"
-                 bgColor="rgba(38, 18, 31,0.6)">
+                 bgColor="rgba(38, 18, 31,0.6)"
+                 overflowY="scroll"
+                 >
 
                    <InputGroup mb={4}>
                     <InputLeftElement
@@ -220,7 +253,7 @@ const Desk=(props)=>{
                     <Input w={{base:"full",md:"100%"}} placeholder="Search alias.." />
                    </InputGroup>
 
-                     <Table variant="simple" display={{base:"none",md:"block"}}>
+                     <Table variant="simple" display={{base:"block",md:"block"}} >
                        <Thead>
                          <Tr>
                            <Th>Time</Th>
@@ -232,15 +265,17 @@ const Desk=(props)=>{
                        </Thead>
                        
                        <Tbody>
-                         <Tr>
-                           <Td>27th October, 8:07</Td>
-                           <Td>Alice</Td>
+                         {messages.map((msg)=>{
+                         return(<Tr>
+                           <Td>{msg[2]}</Td>
+                           <Td>{msg[0]}</Td>
                            <Td>
                               <Button
                                  size="sm"
                                  bgColor="green.700"
                                  _hover={{bgColor:"green.800"}}
                                  _focus={{bgColor:"green.700"}}
+                                 onClick={()=>{setReadArea(msg[1])}}
                               >
                                   <ViewIcon color="white"/>
                               </Button>
@@ -267,7 +302,9 @@ const Desk=(props)=>{
                                   <DeleteIcon color="white"/>
                               </Button>
                             </Td>
-                         </Tr>
+                         </Tr>)
+                        } 
+                         )}
                        </Tbody>
                      </Table>
 
@@ -292,6 +329,17 @@ const Desk=(props)=>{
                      >
                         Reading Desk
                      </Text>
+
+                     <Text
+                     mt={5}
+                      fontSize="lg"
+                      textAlign="center"
+                      fontWeight="bold"
+                     >
+                        {readArea}
+                     </Text>
+
+
                       
                    </Box>
             </Stack> 
@@ -485,6 +533,35 @@ const Desk=(props)=>{
 
 </Flex> 
     )
+                      }
+    else{
+      return(
+        <Center 
+                h="100vh" 
+                bgGradient="linear(black,rgba(23, 47, 66,1))"
+                >   
+                <Flex 
+                 direction="column"
+                 w="full"
+                 align="center"
+                 >
+                    <Spinner 
+                      size="xl" 
+                      color="white" />
+
+                    <Text 
+                     mt={5}
+                     color="white"
+                     fontFamily="monospace" 
+                     fontSize="2xl">
+                         Loading your inbox...
+                    </Text>
+
+                 </Flex>
+                    
+                </Center>
+      )
+    }
 }
 
 export default Desk;

@@ -11,6 +11,9 @@ cors=CORS()
 mail = Mail()
 
 from NightTail.auth import auth_blueprint
+from NightTail.ciphers import ciphers_blueprint
+from NightTail.messaging import messaging_blueprint
+
 def create_app():
 
     app = Flask(__name__,static_folder='../public',static_url_path='')
@@ -32,6 +35,8 @@ def create_app():
     mail.init_app(app)
 
     app.register_blueprint(auth_blueprint)
+    app.register_blueprint(ciphers_blueprint)
+    app.register_blueprint(messaging_blueprint)
 
     @app.errorhandler(404)
     def serve(e):

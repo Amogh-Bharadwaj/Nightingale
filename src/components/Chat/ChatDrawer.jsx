@@ -26,14 +26,48 @@ import {
 } from "@chakra-ui/react"
 
 
-const ChatDrawer=()=>{
+const ChatDrawer=(alias)=>{
 
     const [chatDrawer,setChatDrawer] = useState(false);
     const [drawerIcon,setDrawerIcon] = useState( <ArrowLeftIcon 
         color="white"
         //border="2px solid white"
         boxSize={4}/>);
+
+    const [msg,setMsg]= useState("");
+    const [recAl, setRecAl]=useState("");
     
+    const send=()=>{
+        fetch(
+            `http://127.0.0.1:5000/tail/send`,
+            {
+              method: "POST",
+              body: JSON.stringify({
+                receiver:recAl,
+                msg:msg
+               
+              }),
+              headers: {
+               "Content-type": "application/json",
+               "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
+            },
+            }
+          )
+            .then((response) => response.json())
+            .then((json) => {
+              console.log("sending results: ",json);
+            
+            })
+
+    }
+
+    const handleChange=(e)=>{
+        setMsg(e.target.value);
+    }
+
+    const handleAlias=(e)=>{
+        setRecAl(e.target.value);
+    }
 
     const ToggleChat=()=>{
         setChatDrawer(!chatDrawer);
@@ -121,6 +155,7 @@ const ChatDrawer=()=>{
                 borderColor="rgba(255,255,255,0.2)"
                 fontFamily="monospace"
                 textColor="white" 
+                onChange={handleAlias}
                 />
             </InputGroup>
             </Box>
@@ -149,6 +184,8 @@ const ChatDrawer=()=>{
                 borderColor="rgba(255,255,255,0.2)"
                 fontFamily="monospace"
                 textColor="white"
+                
+                onChange={handleChange}
                 />
             </Box>
     
@@ -158,6 +195,7 @@ const ChatDrawer=()=>{
              _focus={{border:"none"}}
              bgColor="rgba(23, 102, 64,1)"
              boxShadow="0 0 2px 2px rgba(0,0,0,0.5)"
+             onClick={send}
              >
                  <Text
                  fontSize="2xl"

@@ -17,7 +17,38 @@ const CipherForm=({cipher})=>{
     
     const [msg,setMSG] = useState("");
     const [result,setResult] = useState("");
-
+    
+    const handleMsg=(e)=>{
+        console.log(e.target.value)
+        setMSG(e.target.value)
+    }
+    const cipherEncrypt=(cipher)=>{
+        fetch(
+            `http://127.0.0.1:5000/ciphers/AES`,
+            {
+              method: "POST",
+              body: JSON.stringify({
+                message:msg,
+                option:"encrypt",
+              }),
+              headers: {
+               "Content-type": "application/json",
+            },
+            }
+          )
+            .then((response) => response.json())
+            .then((json) => {
+              console.log("Encryption results: ",json);
+              let ciphertext = json["Ciphertext"];
+              let key = json["Key"];
+              let res = "Ciphertext: "+ciphertext+"\n\nKey: "+key;
+              console.log("res: ",res)
+              setResult(res)
+              console.log("result: ",result)
+            })
+    }
+    
+    
     return(
         <form>
             <FormControl textColor="white">
@@ -41,7 +72,23 @@ const CipherForm=({cipher})=>{
                 h={{base:"30vw",md:"6vw",lg:"5vw"}}
                 my={5}
                 fontSize="xl"
+                onChange={handleMsg}
                 placeholder="Message to encrypt..."/>
+
+                <FormLabel pt={5}>
+                    <Text 
+                     fontSize={{base:"xl",md:"2xl"}}
+                    >
+                        Key:
+                    </Text>
+                </FormLabel>
+
+                <Input
+                w={{base:"90%",md:"50%"}} 
+                h={{base:"30vw",md:"6vw",lg:"5vw"}}
+                my={5}
+                fontSize="xl"
+                placeholder="Relevant only if decrypting"/>
 
                <Flex 
                direction="row"
@@ -54,6 +101,7 @@ const CipherForm=({cipher})=>{
                   bgGradient="linear(green.700,#0C723A)"
                   boxShadow="0px 7px black"
                   w={{md:"25%"}}
+                  onClick={cipherEncrypt}
                   >
                       <Text
                         fontSize={{base:"lg",md:"2xl"}}>
@@ -90,7 +138,7 @@ const CipherForm=({cipher})=>{
                      </Text>
                      
                 </FormLabel>
-                <Textarea w={{base:"90%",md:"50%"}} h="5vw" />
+                <Textarea w={{base:"90%",md:"70%"}} h={{base:"5vh",md:"20vh"}} textColor="white" value={result}/>
 
               
             </FormControl>

@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.106b4ad6.chunk.css",
+    "main.js": "/static/js/main.30cbbf92.chunk.js",
+    "main.js.map": "/static/js/main.30cbbf92.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c1e3a20b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c1e3a20b.js.map",
+    "static/js/2.904113df.chunk.js": "/static/js/2.904113df.chunk.js",
+    "static/js/2.904113df.chunk.js.map": "/static/js/2.904113df.chunk.js.map",
+    "static/js/3.3eaaf6bb.chunk.js": "/static/js/3.3eaaf6bb.chunk.js",
+    "static/js/3.3eaaf6bb.chunk.js.map": "/static/js/3.3eaaf6bb.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.106b4ad6.chunk.css.map": "/static/css/main.106b4ad6.chunk.css.map",
+    "static/js/2.904113df.chunk.js.LICENSE.txt": "/static/js/2.904113df.chunk.js.LICENSE.txt",
+    "static/media/Nightingale.a597773a.gif": "/static/media/Nightingale.a597773a.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c1e3a20b.js",
+    "static/js/2.904113df.chunk.js",
+    "static/css/main.106b4ad6.chunk.css",
+    "static/js/main.30cbbf92.chunk.js"
+  ]
+}
