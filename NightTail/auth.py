@@ -104,7 +104,8 @@ def OTPVerification():
     password = request.json["password"]
     user_otp = int(request.json["otp"])
     if(user_otp!=otp):
-        return {"otpError":"Wrong OTP! Try again"}
+        
+        return {"otpError":"Wrong OTP! Try again","You entered: ": str(user_otp),"Actual otp: ":str(otp)}
     
      #Inserting hashed user data into the database
     insert_sql = "INSERT INTO users VALUES (DEFAULT,crypt(%s,gen_salt('bf')),%s,crypt(%s, gen_salt('bf')));"

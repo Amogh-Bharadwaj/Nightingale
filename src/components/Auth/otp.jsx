@@ -30,6 +30,7 @@ const OTPForm=({email,alias,password})=>{
     const getOTP=(e)=>{
         
         setOTP(e.target.value)
+        console.log("User OTP: ",userOTP);
     }
 
     const handleOTPSubmit=(e)=>{
