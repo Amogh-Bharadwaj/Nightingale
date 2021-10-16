@@ -90,7 +90,20 @@ def getInbox():
     try:
         result = cursor.fetchall()[0][0]["messages"][0]
     except:
-        result = [[]]
+        time = datetime.datetime.now()
+        month= time.strftime("%b")
+        date = time.strftime("%d")
+        year = time.strftime("%Y")
+
+        suffix="th"
+        if date=="1":
+            suffix="st"
+        elif date=="2":
+            suffix=="nd"
+        elif date=="3":
+            suffix=="rd"
+        time=date+suffix+" "+month+" "+year
+        result = [['Admin','Welcome to Nightingale!. Ask your friends for their aliases to secretly message them.',time]]
     
     return {"Messages":result}
 
