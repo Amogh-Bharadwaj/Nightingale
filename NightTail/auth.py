@@ -15,7 +15,7 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cursor=conn.cursor()
 
 from random import randint
-otp = randint(pow(10,5),pow(10,6)-1) #otp generation
+otp = 234542
 
 
 
