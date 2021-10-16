@@ -84,7 +84,7 @@ const SignUpForm=()=>{
     let pass=true;
     
     console.log("Performing post request")
-    fetch(`http://127.0.0.1:5000/tail/signup`,
+    fetch(`https://nightingale-project.herokuapp.com/tail/signup`,
     {
       method:"POST",
       body: JSON.stringify({
