@@ -40,7 +40,7 @@ const OTPForm=({email,alias,password})=>{
         if(otpError==true){return;}
 
         fetch(
-          `http://127.0.0.1:5000/tail/signup/otp`,
+          `/tail/signup/otp`,
           {
             method: "POST",
             body: JSON.stringify({

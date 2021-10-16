@@ -3,7 +3,7 @@ import React from "react";
 const AuthCheck= async ()=>{
    let pass=-1;
    let alias="";
-   await fetch(`http://127.0.0.1:5000/tail/logged-in`,
+   await fetch(`/tail/logged-in`,
     {
         method: "GET",
         headers: {

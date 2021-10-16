@@ -108,7 +108,7 @@ const SignUpForm=()=>{
 
   const fetchCredentialRecords=()=>{
     fetch(
-      `http://127.0.0.1:5000/tail/user-details`,
+      `/tail/user-details`,
       {
         method: "GET",
         headers: {
