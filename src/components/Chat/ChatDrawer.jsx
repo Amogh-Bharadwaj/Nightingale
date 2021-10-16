@@ -39,7 +39,7 @@ const ChatDrawer=(alias)=>{
     
     const send=()=>{
         fetch(
-            `/tail/send`,
+            `https://nightingale-project.herokuapp.com/tail/send`,
             {
               method: "POST",
               body: JSON.stringify({

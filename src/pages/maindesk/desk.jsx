@@ -62,7 +62,7 @@ const Desk=(props)=>{
 
     const getInbox=()=>{
       fetch(
-        `/tail/get-inbox`,
+        `https://nightingale-project.herokuapp.com/tail/get-inbox`,
         {
           method: "POST",
           body: JSON.stringify({

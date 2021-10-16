@@ -24,7 +24,7 @@ const CipherForm=({cipher})=>{
     }
     const cipherEncrypt=(cipher)=>{
         fetch(
-            `http://127.0.0.1:5000/ciphers/AES`,
+            `https://nightingale-project.herokuapp.com/ciphers/AES`,
             {
               method: "POST",
               body: JSON.stringify({

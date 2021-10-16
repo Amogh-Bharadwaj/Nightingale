@@ -40,7 +40,7 @@ const OTPForm=({email,alias,password})=>{
         if(otpError==true){return;}
 
         fetch(
-          `/tail/signup/otp`,
+          `https://nightingale-project.herokuapp.com/tail/signup/otp`,
           {
             method: "POST",
             body: JSON.stringify({

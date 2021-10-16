@@ -3,7 +3,7 @@ import React from "react";
 const AuthCheck= async ()=>{
    let pass=-1;
    let alias="";
-   await fetch(`/tail/logged-in`,
+   await fetch(`https://nightingale-project.herokuapp.com/tail/logged-in`,
     {
         method: "GET",
         headers: {

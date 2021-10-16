@@ -108,7 +108,7 @@ const SignUpForm=()=>{
 
   const fetchCredentialRecords=()=>{
     fetch(
-      `/tail/user-details`,
+      `https://nightingale-project.herokuapp.com/tail/user-details`,
       {
         method: "GET",
         headers: {

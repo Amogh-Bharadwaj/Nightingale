@@ -48,7 +48,7 @@ const LogInForm=()=>{
     if(userPassword.length==0){setPasswordError("[ Enter a password! ]");error=true;}
     if(error==true){console.log("Error is true");return;}
     fetch(
-      `/tail/login`,
+      `https://nightingale-project.herokuapp.com/tail/login`,
       {
         method: "POST",
         body: JSON.stringify({
