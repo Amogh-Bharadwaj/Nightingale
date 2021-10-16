@@ -11,7 +11,8 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv(),verbose=True)
 print(os.environ.get("PSQLUSER"),find_dotenv())
   
-conn=psycopg2.connect(host=os.getenv("HOSTNAME"),port=os.getenv("PORT"), database=os.getenv("DATABASE"),user=os.getenv("PSQLUSER"),password=os.getenv("PASSWORD"))
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require') 
 cursor=conn.cursor()
 
 messaging_blueprint = Blueprint("messaging", __name__, url_prefix="/tail")
