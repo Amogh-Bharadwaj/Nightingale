@@ -87,7 +87,11 @@ def getInbox():
     get_sql="SELECT json_build_object('user_alias',json_agg(user_alias),'messages',json_agg(messages)) FROM inbox WHERE user_alias=(%s);"
     get_data=(alias,)
     cursor.execute(get_sql,get_data)
-    result = cursor.fetchall()[0][0]["messages"][0]
+    try:
+        result = cursor.fetchall()[0][0]["messages"][0]
+    except:
+        result = [[]]
+    
     return {"Messages":result}
 
  
