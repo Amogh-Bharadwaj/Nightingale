@@ -1,5 +1,5 @@
 from flask import Flask,jsonify, request, Blueprint,current_app as app
-from flask_jwt_extended import jwt_optional, get_jwt_identity, create_access_token
+from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from flask_mail import Message
 from NightTail import mail
 
@@ -21,7 +21,7 @@ otp = randint(pow(10,5),pow(10,6)-1) #otp generation
 auth_blueprint = Blueprint("auth", __name__, url_prefix="/tail")
 
 @auth_blueprint.route("/logged-in")
-@jwt_optional
+@jwt_required(optional=True)
 def LoggedIn():
     login_pass=False
     userId= get_jwt_identity()
@@ -44,7 +44,7 @@ def LoggedIn():
 
 
 @auth_blueprint.route("/user-details")
-@jwt_optional
+@jwt_required(optional=True)
 def EmailALiasList():
     details = []
     

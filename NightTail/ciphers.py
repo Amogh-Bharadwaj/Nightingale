@@ -1,12 +1,12 @@
 from flask import Flask,jsonify, request, Blueprint,current_app as app
-from flask_jwt_extended import jwt_optional, get_jwt_identity, create_access_token
+from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 from Crypto.Util.number import bytes_to_long, long_to_bytes
 ciphers_blueprint = Blueprint("ciphers", __name__, url_prefix="/ciphers")
 
 @ciphers_blueprint.route("/AES",methods=["POST"])
-@jwt_optional
+@jwt_required(optional=True)
 def AESCrypt():
     option = request.json["option"]
     message = request.json["message"]

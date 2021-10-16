@@ -1,5 +1,5 @@
 from flask import Flask,jsonify, request, Blueprint,current_app as app
-from flask_jwt_extended import jwt_optional, get_jwt_identity, create_access_token
+from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from flask_mail import Message
 from NightTail import mail
 import datetime
@@ -17,7 +17,7 @@ cursor=conn.cursor()
 messaging_blueprint = Blueprint("messaging", __name__, url_prefix="/tail")
 
 @messaging_blueprint.route("/send",methods=["POST"])
-@jwt_optional
+@jwt_required(optional=True)
 def sendMessage():
     id_check = get_jwt_identity()
     sender_alias = ""
@@ -80,7 +80,7 @@ def sendMessage():
     return {"Success":"Message sent."}
 
 @messaging_blueprint.route("/get-inbox",methods=["POST"])
-@jwt_optional
+@jwt_required(optional=True)
 def getInbox():
     alias = request.json["alias"]
     get_sql="SELECT json_build_object('user_alias',json_agg(user_alias),'messages',json_agg(messages)) FROM inbox WHERE user_alias=(%s);"
