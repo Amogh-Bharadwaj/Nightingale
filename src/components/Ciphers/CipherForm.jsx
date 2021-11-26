@@ -16,11 +16,17 @@ import{
 const CipherForm=({cipher})=>{
     
     const [msg,setMSG] = useState("");
+    const [Key,setKey] = useState("");
     const [result,setResult] = useState("");
     
     const handleMsg=(e)=>{
         console.log(e.target.value)
         setMSG(e.target.value)
+    }
+
+    const handleKey=(e{
+        console.log(e.target.value)
+        setKey(e.target.value)
     }
     const cipherEncrypt=(cipher)=>{
         fetch(
@@ -29,6 +35,7 @@ const CipherForm=({cipher})=>{
               method: "POST",
               body: JSON.stringify({
                 message:msg,
+                key:Key
                 option:"encrypt",
               }),
               headers: {
@@ -55,6 +62,7 @@ const CipherForm=({cipher})=>{
               method: "POST",
               body: JSON.stringify({
                 message:msg,
+                key:
                 option:"decrypt",
               }),
               headers: {
@@ -114,6 +122,7 @@ const CipherForm=({cipher})=>{
                 h={{base:"30vw",md:"6vw",lg:"5vw"}}
                 my={5}
                 fontSize="xl"
+                onChange={handleKey}
                 placeholder="Relevant only if decrypting"/>
 
                <Flex 
