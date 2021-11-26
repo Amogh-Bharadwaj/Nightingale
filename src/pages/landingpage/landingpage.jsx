@@ -57,7 +57,7 @@ import
       fontSize={{base:"xs",md:"md"}}
       color="white"
       >
-        Log in with existing account
+        Log in 
       </Text>
 
    </Button>)
