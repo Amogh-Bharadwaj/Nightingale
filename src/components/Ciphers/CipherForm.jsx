@@ -35,7 +35,7 @@ const CipherForm=({cipher})=>{
               method: "POST",
               body: JSON.stringify({
                 message:msg,
-                key:Key
+                key:Key,
                 option:"encrypt",
               }),
               headers: {
