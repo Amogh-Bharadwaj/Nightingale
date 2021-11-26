@@ -24,7 +24,7 @@ const CipherForm=({cipher})=>{
         setMSG(e.target.value)
     }
 
-    const handleKey=(e{
+    const handleKey=(e)={
         console.log(e.target.value)
         setKey(e.target.value)
     }
