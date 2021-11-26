@@ -18,6 +18,7 @@ def AESCrypt():
   
     if option == "decrypt":
         key = long_to_bytes(int(request.json["key"]))
+        print("Key in decrypt: ",key)
         d_cipher = AES.new(key, AES.MODE_ECB)
         pt = d_cipher.decrypt(long_to_bytes(message))
         try:
