@@ -47,6 +47,32 @@ const CipherForm=({cipher})=>{
               console.log("result: ",result)
             })
     }
+
+    const cipherDecrypt=(cipher)=>{
+        fetch(
+            `https://nightingale-project.herokuapp.com/ciphers/AES`,
+            {
+              method: "POST",
+              body: JSON.stringify({
+                message:msg,
+                option:"decrypt",
+              }),
+              headers: {
+               "Content-type": "application/json",
+            },
+            }
+          )
+            .then((response) => response.json())
+            .then((json) => {
+              console.log("Decryption results: ",json);
+              let ciphertext = json["Plaintext"];
+              let key = json["Key"];
+              let res = "Ciphertext: "+ciphertext+"\n\nKey: "+key;
+              console.log("res: ",res)
+              setResult(res)
+              console.log("result: ",result)
+            })
+    }
     
     
     return(
@@ -114,6 +140,7 @@ const CipherForm=({cipher})=>{
                   bgGradient="linear(red.700,#4d0000)"
                   boxShadow="0px 7px black"
                   w={{md:"25%"}}
+                  onClick={cipherDecrypt}
                   >
                       <Text
                          fontSize={{base:"lg",md:"2xl"}}>
