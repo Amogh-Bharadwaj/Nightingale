@@ -65,8 +65,8 @@ const CipherForm=({cipher})=>{
             .then((response) => response.json())
             .then((json) => {
               console.log("Decryption results: ",json);
-              let ciphertext = json["Plaintext"];
-              let key = json["Key"];
+              let plaintext = json["Plaintext"];
+              let key = json["key"];
               let res = "Ciphertext: "+ciphertext+"\n\nKey: "+key;
               console.log("res: ",res)
               setResult(res)
