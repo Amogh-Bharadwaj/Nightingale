@@ -63,15 +63,17 @@ def sendMessage():
     time=date+suffix+" "+month+" "+year
     
 
-    if cursor.fetchall()[0][0]==0:
+    try:
         inbox_sql="INSERT INTO inbox VALUES(%s,%s)"
-        inbox_data=(alias,[sender_alias,message,time])
+        inbox_data=(receiver_alias,[alias,message,time])
+        cursor.execute(inbox_sql,inbox_data)
         
-    else:
+    except:
         inbox_sql="UPDATE inbox SET messages = array_cat(messages,%s) WHERE user_alias=(%s);"
         inbox_data=([[alias,message,time]],receiver_alias)
+        cursor.execute(inbox_sql,inbox_data)
 
-    cursor.execute(inbox_sql,inbox_data)
+    
 
     conn.commit()
 
