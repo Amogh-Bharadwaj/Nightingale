@@ -82,32 +82,8 @@ def SignUp():
     result = int(cursor.fetchall()[0][0])
     if result>0:
         return {"aliasError":"Alias exists already!"}
-
-    body = f"Thank you for using Nightingale! Your OTP is: {otp}"
-    print("Mail body:\n",body)
-
-    msg = Message("OTP For Nightingale",sender = os.getenv("MAIL_USERNAME"),recipients = [emailid])
-    msg.body = body
     
-        
-    mail.send(msg)
-    
-    return {"success":"otp sent"}
-
-
-
-@auth_blueprint.route("/signup/otp", methods=["POST"])
-def OTPVerification():
-    #Fetching data from frontend
-    emailid = request.json["email"]
-    alias = request.json["alias"]
-    password = request.json["password"]
-    user_otp = int(request.json["otp"])
-    if(user_otp!=otp):
-        
-        return {"otpError":"Wrong OTP! Try again","You entered: ": str(user_otp),"Actual otp: ":str(otp)}
-    
-     #Inserting hashed user data into the database
+      #Inserting hashed user data into the database
     insert_sql = "INSERT INTO users VALUES (DEFAULT,crypt(%s,gen_salt('bf')),%s,crypt(%s, gen_salt('bf')));"
     insert_data=(emailid,alias,password)
     cursor.execute(insert_sql,insert_data)
@@ -119,7 +95,6 @@ def OTPVerification():
 
     access_token = create_access_token(identity=int(result[0]))
     return jsonify(jwt=access_token)
-    
 
 
 @auth_blueprint.route("/login", methods=["POST"])

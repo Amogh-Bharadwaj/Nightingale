@@ -3,6 +3,9 @@ from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_tok
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 from Crypto.Util.number import bytes_to_long, long_to_bytes
+from Crypto.Util.Padding import pad, unpad
+
+BLOCK_SIZE = 32
 ciphers_blueprint = Blueprint("ciphers", __name__, url_prefix="/ciphers")
 
 @ciphers_blueprint.route("/AES",methods=["POST"])
@@ -18,13 +21,13 @@ def AESCrypt():
         d_cipher = AES.new(key, AES.MODE_ECB)
         pt = d_cipher.decrypt(long_to_bytes(message))
         try:
-            test = pt.decode()
+            test = unpad(pt,BLOCK_SIZE).decode()
         except:
             return {"AESDecryptError":"Invalid key or ciphertext!"}
         return {"Plaintext":pt}
     else:
         print("message: ",message)
-        ct = e_cipher.encrypt(message.encode())
+        ct = e_cipher.encrypt(pad(message.encode(),BLOCK_SIZE))
         print("ct:",ct)
         return {"Ciphertext":str(bytes_to_long(ct)),"Key":str(bytes_to_long(key))}
 

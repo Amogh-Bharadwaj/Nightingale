@@ -40,12 +40,7 @@ const SignUpForm=()=>{
   const [aliasErrorMessage,setAliasError]=useState("")
   const [passwordErrorMessage,setPasswordError]=useState("")
 
-  //State for OTP
-  const [otpVerified,setVerification]=useState(false)
-
-
-
-
+ 
   const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   
   const getEmail=(e)=>{
@@ -103,6 +98,11 @@ const SignUpForm=()=>{
        if("aliasError" in json){setAliasError("[ Alias already exists! ]");pass=false;}
      })
      if(pass==true){toggleVerified()}
+     else{
+      localStorage.setItem("jwt", json.jwt)
+      console.log("JWT set in Signup")}
+      history.push("/desk",{"Alias":alias});
+     }
   }
 
 
@@ -133,7 +133,7 @@ const SignUpForm=()=>{
     }
   },[userAlias]);
 
-  if(!otpVerified){return(
+  return(
        <form onSubmit={handleSubmit}>
         <FormControl padding="2rem" >
 
@@ -292,12 +292,7 @@ const SignUpForm=()=>{
         </FormControl>
         </form>
   )}
-  else{
-    return(
-      <OTPForm email={userEmail} alias={userAlias} password={userPassword}/>
-
-    )
-  }
+  
 }
 
 export default SignUpForm;
