@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
+import { useHistory } from "react-router-dom";
 import {EmailIcon,ViewIcon,LockIcon} from "@chakra-ui/icons";
-import OTPForm from "./otp";
+
 
 import 
 {   Flex,
@@ -25,7 +26,7 @@ import
 
 const SignUpForm=()=>{
 
-
+ 
   //User entries
   const [userEmail,setEmail] = useState("");
   const [userPassword,setPassword] = useState("");
@@ -39,7 +40,10 @@ const SignUpForm=()=>{
   const [emailErrorMessage,setEmailError]=useState("")
   const [aliasErrorMessage,setAliasError]=useState("")
   const [passwordErrorMessage,setPasswordError]=useState("")
+  
 
+  //History
+  const history = useHistory();
  
   const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   
@@ -61,9 +65,7 @@ const SignUpForm=()=>{
     
   }
 
-  const toggleVerified=()=>{
-    setVerification(true);
-  }
+
   
   const handleSubmit=(e)=>{
     let error=false;
@@ -96,13 +98,15 @@ const SignUpForm=()=>{
        console.log("Post response: ", json);
        if("mailError" in json){setEmailError("[ Email already exists! ]");pass=false;}
        if("aliasError" in json){setAliasError("[ Alias already exists! ]");pass=false;}
+       if(pass==true){
+         localStorage.setItem("jwt", json.jwt)
+         console.log("JWT set in Signup")
+         history.push("/desk",{"Alias":userAlias})}
+      
      })
-     if(pass==true){toggleVerified()}
-     else{
-      localStorage.setItem("jwt", json.jwt)
-      console.log("JWT set in Signup")}
-      history.push("/desk",{"Alias":alias});
-     }
+     
+     
+   
   }
 
 
@@ -291,7 +295,7 @@ const SignUpForm=()=>{
 
         </FormControl>
         </form>
-  )}
+  )
   
 }
 
