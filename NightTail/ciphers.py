@@ -25,7 +25,7 @@ def AESCrypt():
             test = unpad(pt,BLOCK_SIZE).decode()
         except:
             return {"AESDecryptError":"Invalid key or ciphertext!"}
-        return {"Plaintext":pt}
+        return {"Plaintext":test}
     else:
         print("message: ",message)
         ct = e_cipher.encrypt(pad(message.encode(),BLOCK_SIZE))
