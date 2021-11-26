@@ -65,7 +65,7 @@ def sendMessage():
 
     if cursor.fetchall()[0][0]==0:
         inbox_sql="INSERT INTO inbox VALUES(%s,%s)"
-        inbox_data=(alias,[sender,message,time])
+        inbox_data=(alias,[sender_alias,message,time])
         
     else:
         inbox_sql="UPDATE inbox SET messages = array_cat(messages,%s) WHERE user_alias=(%s);"
