@@ -21,7 +21,7 @@ messaging_blueprint = Blueprint("messaging", __name__, url_prefix="/tail")
 @jwt_required(optional=True)
 def sendMessage():
     id_check = get_jwt_identity()
-    
+    sender_alias = ""
     if id_check:
         login_pass=True
         alias_sql="SELECT json_build_object('userAlias',user_alias) FROM users WHERE user_id=(%s)"
@@ -63,11 +63,11 @@ def sendMessage():
     time=date+suffix+" "+month+" "+year
     
 
-    try:
+    if cursor.fetchall()[0][0]==0:
         inbox_sql="INSERT INTO inbox VALUES(%s,%s)"
-        inbox_data=(receiver_alias,[alias,message,time])
+        inbox_data=(alias,[sender_alias,message,time])
         
-    except:
+    else:
         inbox_sql="UPDATE inbox SET messages = array_cat(messages,%s) WHERE user_alias=(%s);"
         inbox_data=([[alias,message,time]],receiver_alias)
 
