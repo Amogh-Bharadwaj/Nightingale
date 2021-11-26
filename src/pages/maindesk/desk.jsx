@@ -59,7 +59,10 @@ const Desk=(props)=>{
     //const messages = [['Alucard', 'PostgreSQL can store the representation of an “infinite” date, timestamp, or interval. Infinite dates are not available to Python', '10th Oct 2008'], ['Alucard', 'PostgreSQL can store the representation of an “infinite” date, timestamp, or interval. Infinite dates are not available to Python', '10th Oct 2008'], ['Alucard', 'PostgreSQL can store the representation of an “infinite” date, timestamp, or interval. Infinite dates are not available to Python', '10th Oct 2008']]
     const [messages,setMessages]=useState([])
    
-
+    const logOut=()=>{
+      localStorage.clear();
+      history.push("/");
+    }
     const getInbox=()=>{
       fetch(
         `https://nightingale-project.herokuapp.com/tail/get-inbox`,
@@ -109,6 +112,7 @@ const Desk=(props)=>{
       _selected={{bgGradient:"linear(rgba(156, 45, 65,0.5),rgba(222, 102, 124,1))"}}
       bgGradient={{md:"linear(rgba(156, 45, 65,1),rgba(222, 102, 124,1))"}}
       justify="center"
+      onClick={logOut}
     >
                 <VStack >
                     <ArrowBackIcon boxSize="1.5em" color="black"/>
