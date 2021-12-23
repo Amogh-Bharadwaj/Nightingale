@@ -200,47 +200,11 @@ const Desk=(props)=>{
              fontFamily="monospace"
              w="full" 
             > 
-                <Stack
-                direction={{base:"row",md:"column"}}
-                align={{md:"center"}}
-                w={{base:"full",md:"23%"}}
-                h="full"
-                display={{base:"none",md:"block"}}
-                pt={5}
-                >
-                    <Text
-                      textAlign="center"
-                      w="full"
-                      color="rgb(166, 93, 117)"
-                      fontSize={{base:"2xl",md:"3xl"}}>
-                          Inbox
-                    </Text>
-                    <List spacing={5} fontSize={{md:"md"}} >
-                        <ListItem>
-                          <ListIcon as={ChevronRightIcon} color="white"/>
-                          <Link variant="ghost" >All</Link> 
-                        </ListItem>
-
-                        <ListItem>
-                          <ListIcon as={ChevronRightIcon} color="white"/>
-                          <Link variant="ghost">Starred</Link> 
-                        </ListItem>
-
-                        <ListItem>
-                          <ListIcon as={ChevronRightIcon} color="white"/>
-                          <Link variant="ghost">Sent</Link> 
-                        </ListItem>
-
-                        <ListItem>
-                          <ListIcon as={ChevronRightIcon} color="white"/>
-                          <Link variant="ghost">Trash</Link> 
-                        </ListItem>                        
-                    </List>
-                </Stack>
+               
 
                 <Box 
                  h="full"
-                 w={{base:"full",md:"70%"}}
+                 w={{base:"full",md:"full"}}
                  mt={5}
                  p={{base:0,md:10}}
                  fontFamily="monospace"
@@ -263,8 +227,6 @@ const Desk=(props)=>{
                            <Th>Time</Th>
                            <Th>Alias</Th>
                            <Th>Read</Th>
-                           <Th>Star</Th>
-                           <Th>Delete</Th>
                          </Tr>
                        </Thead>
                        
@@ -285,27 +247,7 @@ const Desk=(props)=>{
                               </Button>
                            </Td>
                             
-                            <Td>
-                             <Button
-                                 size="sm"
-                                 bgColor="yellow.700"
-                                 _hover={{bgColor:"yellow.800"}}
-                                 _focus={{bgColor:"yellow.700"}}
-                              >
-                                  <SunIcon color="white"/>
-                              </Button>
-                            </Td>
-                                
-                            <Td>
-                              <Button
-                                 size="sm"
-                                 bgColor="red.700"
-                                 _hover={{bgColor:"red.800"}}
-                                 _focus={{bgColor:"red.700"}}
-                                >
-                                  <DeleteIcon color="white"/>
-                              </Button>
-                            </Td>
+                           
                          </Tr>)
                         } 
                          )}

@@ -22,6 +22,7 @@ import {
     InputLeftElement,
     Input,
     Textarea,
+    useToast
   
 } from "@chakra-ui/react"
 
@@ -36,6 +37,8 @@ const ChatDrawer=(alias)=>{
 
     const [msg,setMsg]= useState("");
     const [recAl, setRecAl]=useState("");
+
+    const toast = useToast();
     
     const send=()=>{
         fetch(
@@ -56,6 +59,15 @@ const ChatDrawer=(alias)=>{
             .then((response) => response.json())
             .then((json) => {
               console.log("sending results: ",json);
+              setMsg("");
+              setRecAl("");
+              toast({
+                title: 'Message sent.',
+                description: "Inform your receiver!",
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+              })
             
             })
 
