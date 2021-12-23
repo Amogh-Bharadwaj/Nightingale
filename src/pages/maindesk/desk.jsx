@@ -205,7 +205,7 @@ const Desk=(props)=>{
 
                 <Box 
                  h="full"
-                 w={{base:"full",md:"full"}}
+                 w={{base:"full",md:"80vw"}}
                  mt={5}
                  p={{base:0,md:10}}
                  fontFamily="monospace"
@@ -216,7 +216,7 @@ const Desk=(props)=>{
 
               
 
-                     <Table variant="simple" display={{base:"block",md:"block"}} w="70vw">
+                     <Table variant="simple" display={{base:"block",md:"block"}} >
                        <Thead>
                          <Tr>
                            <Th>Time</Th>
