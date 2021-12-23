@@ -213,15 +213,9 @@ const Desk=(props)=>{
                  overflowY="scroll"
                  >
 
-                   <InputGroup mb={4}>
-                    <InputLeftElement
-                      children={<SearchIcon color="white"/>}
-                      pointerEvents="none"
-                    />
-                    <Input w={{base:"full",md:"100%"}} placeholder="Search alias.." />
-                   </InputGroup>
+              
 
-                     <Table variant="simple" display={{base:"block",md:"block"}} >
+                     <Table variant="simple" display={{base:"block",md:"block"}} w="full">
                        <Thead>
                          <Tr>
                            <Th>Time</Th>
