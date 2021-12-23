@@ -94,6 +94,7 @@ const Desk=(props)=>{
   direction="column"
   align="center"
   bgGradient="linear(45deg,black,#172334)"
+  w="100vw"
 > 
 
     <ChatDrawer alias={alias} />
