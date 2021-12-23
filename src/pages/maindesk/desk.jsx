@@ -199,7 +199,7 @@ const Desk=(props)=>{
              align={{md:"center"}}
              h="80%"
              fontFamily="monospace"
-             w="full" 
+             w="100vw" 
             > 
                
 
@@ -207,7 +207,7 @@ const Desk=(props)=>{
                  h="full"
                  w={{base:"full",md:"70vw"}}
                  mt={5}
-                 p={{base:0,md:0}}
+                 p={{base:0,md:5}}
                  fontFamily="monospace"
                  textColor="whiteAlpha.700"
                  bgColor="rgba(38, 18, 31,0.6)"
@@ -218,10 +218,10 @@ const Desk=(props)=>{
 
                      <Table 
                        variant="simple" 
-                       display={{base:"block",md:"block"}} 
-                       w="70vw"
+                       display={{base:"block",md:"inline-table"}} 
+                       w="full"
                      >
-                       <Thead>
+                       <Thead w="full">
                          <Tr>
                            <Th>Time</Th>
                            <Th>Alias</Th>
@@ -229,7 +229,7 @@ const Desk=(props)=>{
                          </Tr>
                        </Thead>
                        
-                       <Tbody>
+                       <Tbody w="full">
                          {messages.map((msg)=>{
                          return(<Tr>
                            <Td>{msg[2]}</Td>
@@ -510,4 +510,5 @@ const Desk=(props)=>{
 }
 
 export default Desk;
+
 
