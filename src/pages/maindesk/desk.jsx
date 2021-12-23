@@ -216,7 +216,7 @@ const Desk=(props)=>{
 
               
 
-                     <Table variant="simple" display={{base:"block",md:"block"}} w="full">
+                     <Table variant="simple" display={{base:"block",md:"block"}} w="70vw">
                        <Thead>
                          <Tr>
                            <Th>Time</Th>
