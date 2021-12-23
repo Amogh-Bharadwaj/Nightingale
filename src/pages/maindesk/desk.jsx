@@ -205,9 +205,9 @@ const Desk=(props)=>{
 
                 <Box 
                  h="full"
-                 w={{base:"full",md:"80vw"}}
+                 w={{base:"full",md:"70vw"}}
                  mt={5}
-                 p={{base:0,md:10}}
+                 p={{base:0,md:0}}
                  fontFamily="monospace"
                  textColor="whiteAlpha.700"
                  bgColor="rgba(38, 18, 31,0.6)"
@@ -219,7 +219,7 @@ const Desk=(props)=>{
                      <Table 
                        variant="simple" 
                        display={{base:"block",md:"block"}} 
-                       w="full"
+                       w="70vw"
                      >
                        <Thead>
                          <Tr>
