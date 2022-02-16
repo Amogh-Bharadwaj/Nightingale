@@ -127,7 +127,7 @@ import
            pt="1rem"
            color="white"
            >
-             Encrypt and decrypt your chats with the widest set of cryptographic tools you'll find in one place.
+             Encrypt and decrypt your mails with AES and render any eavesdropping useless.
         </Text>
         <Image  src={Nightingale}  h={{md:"40%",lg:"50%"}} w={{md:"60%",lg:"50%"}} display={{base:"none",md:"flex"}} mx="25%" />
       </Box>
