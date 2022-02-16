@@ -52,8 +52,6 @@ const Desk=(props)=>{
     const history = useHistory();
     const alias = props.location.state.Alias;
 
-    const [cipher,setCipher]=useState("AES")
-
     const [readArea,setReadArea] = useState("");
 
     //const messages = [['Alucard', 'PostgreSQL can store the representation of an “infinite” date, timestamp, or interval. Infinite dates are not available to Python', '10th Oct 2008'], ['Alucard', 'PostgreSQL can store the representation of an “infinite” date, timestamp, or interval. Infinite dates are not available to Python', '10th Oct 2008'], ['Alucard', 'PostgreSQL can store the representation of an “infinite” date, timestamp, or interval. Infinite dates are not available to Python', '10th Oct 2008']]
@@ -197,14 +195,14 @@ const Desk=(props)=>{
             <Stack
              direction={{base:"column",md:"row"}}
              align={{md:"center"}}
-             h="80%"
+             h={{base:"auto",md:"80%"}}
              fontFamily="monospace"
              w="100vw" 
             > 
                
 
                 <Box 
-                 h="full"
+                 h={{base:"100vh",md:"full"}}
                  w={{base:"full",md:"70vw"}}
                  mt={5}
                  p={{base:0,md:5}}
@@ -262,7 +260,7 @@ const Desk=(props)=>{
                  <Box
                    mt={5}
                    w={{base:"full",md:"30%"}}
-                   h="full"
+                   h={{base:"100vh",md:"full"}}
                    textColor="whiteAlpha.500"
                    bgGradient="linear(rgba(115, 30, 58,0.9),rgba(38, 18, 31,0.9))"
                    >
@@ -300,169 +298,6 @@ const Desk=(props)=>{
        fontFamily="monospace"
        
       >
-        <VStack
-          w={{base:"full",md:"25%"}}
-          bgGradient="linear(rgba(0,0,0,0.6),black)"
-          p={7}
-        >
-          <Text
-            bgGradient="linear(rgb(2, 46, 59),rgb(15, 212, 153))"
-            bgClip="text"
-            fontSize="3xl"
-            fontWeight="bold"
-           >Ciphers</Text>
-          
-          <Box
-          textColor="white"
-          pt={5}
-          >
-          <List spacing={5}>
-            <ListItem>
-              <Text
-               color="rgb(8, 171, 252)"
-              >
-                Symmetric Ciphers
-              </Text>
-
-               <Box
-               pl={5}
-              >
-                <List spacing={2}>
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                      <Link 
-                        variant="ghost"
-                        onClick={()=>{setCipher("AES")}}
-                      >
-                        AES
-                      </Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                      <Link 
-                        variant="ghost"
-                        onClick={()=>{setCipher("DES")}}
-                      >
-                          DES
-                      </Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                      <Link 
-                        variant="ghost"
-                        onClick={()=>{setCipher("Triple DES")}}
-                      >
-                        Triple DES
-                      </Link>
-                  </ListItem>
-
-                </List>
-              </Box>
-            </ListItem>
-
-            <ListItem>
-              <Text
-               color="rgb(8, 171, 252)"
-              >
-                Asymmetric and Other Schemes
-              </Text>
-              
-
-
-               <Box
-               pl={5}
-              >
-                <List spacing={2}>
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link 
-                        variant="ghost"
-                        onClick={()=>{setCipher("RSA")}}
-                      >
-                        RSA
-                      </Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link 
-                        variant="ghost"
-                        onClick={()=>{setCipher("Diffie-Hellman")}}
-                      >
-                        Diffie-Hellman
-                      </Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link 
-                        variant="ghost"
-                        onClick={()=>{setCipher("ECC")}}
-                      >
-                        ECC
-                      </Link>
-                  </ListItem>
-
-                
-                </List>
-              </Box>
-            </ListItem>
-
-
-            <ListItem>
-              <Text
-               color="rgb(8, 171, 252)"
-              >
-                Classics
-              </Text>
-
-               <Box
-               pl={5}
-              >
-                <List spacing={2}>
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link 
-                        variant="ghost"
-                        onClick={()=>{setCipher("Caesar Cipher")}}
-                      >
-                        Caesar Cipher
-                      </Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link 
-                        variant="ghost"
-                        onClick={()=>{setCipher("Vigenere Cipher")}}
-                      >
-                        Vigenere Cipher
-                      </Link>
-                  </ListItem>
-
-                  <ListItem>
-                    <ListIcon as={UnlockIcon} color="white.600" />
-                    <Link 
-                        variant="ghost"
-                        onClick={()=>{setCipher("Playfair Cipher")}}
-                      >
-                        Playfair Cipher
-                      </Link>
-                  </ListItem>
-
-                </List>
-              </Box>
-            </ListItem>
-
-
-
-          </List>
-          </Box>
-
-
-        </VStack>
 
         <Box 
          w="full" 
@@ -470,7 +305,7 @@ const Desk=(props)=>{
          p={10}
          //bgColor="green"
          >
-           <CipherForm cipher={cipher} />
+           <CipherForm cipher={"AES"} />
         </Box>
       </Stack>
 
