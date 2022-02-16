@@ -221,7 +221,7 @@ const ChatDrawer=(alias)=>{
                  </Text>
              </Button>
 
-             <Center>
+             <Center mt={5} display={load? "block":"none"}>
                  <Spinner size="lg" color="blue" />
              </Center>
             
