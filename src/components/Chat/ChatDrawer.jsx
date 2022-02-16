@@ -22,13 +22,14 @@ import {
     InputLeftElement,
     Input,
     Textarea,
-    useToast
+    useToast,
+    Spinner
   
 } from "@chakra-ui/react"
 
 
 const ChatDrawer=(alias)=>{
-
+    const [load,setLoad] = useState(true);
     const [chatDrawer,setChatDrawer] = useState(false);
     const [drawerIcon,setDrawerIcon] = useState( <ArrowLeftIcon 
         color="white"
@@ -41,6 +42,7 @@ const ChatDrawer=(alias)=>{
     const toast = useToast();
     
     const send=()=>{
+        setLoad(true);
         fetch(
             `https://nightingale-project.herokuapp.com/tail/send`,
             {
@@ -58,7 +60,8 @@ const ChatDrawer=(alias)=>{
           )
             .then((response) => response.json())
             .then((json) => {
-              console.log("sending results: ",json);
+              setLoad(false);
+        
               setMsg("");
               setRecAl("");
               toast({
@@ -216,6 +219,10 @@ const ChatDrawer=(alias)=>{
                      SEND
                  </Text>
              </Button>
+
+             <Center>
+                 <Spinner size="lg" color="blue" />
+             </Center>
             
             </VStack>
             </FormControl>
