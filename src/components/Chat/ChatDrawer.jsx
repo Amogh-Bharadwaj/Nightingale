@@ -30,7 +30,7 @@ import {
 
 
 const ChatDrawer=(alias)=>{
-    const [load,setLoad] = useState(true);
+    const [load,setLoad] = useState(false);
     const [chatDrawer,setChatDrawer] = useState(false);
     const [drawerIcon,setDrawerIcon] = useState( <ArrowLeftIcon 
         color="white"
