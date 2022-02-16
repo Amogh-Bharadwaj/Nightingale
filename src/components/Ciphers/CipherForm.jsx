@@ -91,7 +91,7 @@ const CipherForm=({cipher})=>{
                   textAlign="center"
                   fontSize="5xl"
                 >
-                    {cipher}
+                    {cipher} WORKSPACE
                 </Text>
                 <FormLabel pt={5}>
                     <Text 
