@@ -186,7 +186,6 @@ const Desk=(props)=>{
         <Flex
         direction="column"
         w="full"
-        h="full"
         align="center"
         p={{base:2,md:7}}
         > 
