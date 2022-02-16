@@ -221,8 +221,8 @@ const ChatDrawer=(alias)=>{
                  </Text>
              </Button>
 
-             <Center mt={5} display={load? "block":"none"}>
-                 <Spinner size="lg" color="blue" />
+             <Center mt={5} w="full" display={load? "block":"none"}>
+                 <Spinner size="lg" color="white" />
              </Center>
             
             </VStack>
