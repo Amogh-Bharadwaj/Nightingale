@@ -178,7 +178,7 @@ const Desk=(props)=>{
        direction={{base:"column",md:"row"}}
        mt={20}
        w="full"
-       h="50vh"
+       h={{md:"50vh"}}
        bgGradient="linear(-45deg,rgba(38, 18, 31,0.7),black)"
        textColor="white"
        >   
@@ -201,7 +201,7 @@ const Desk=(props)=>{
                
 
                 <Box 
-                 h={{base:"100vh",md:"full"}}
+                 h={{base:"70vh",md:"full"}}
                  w={{base:"full",md:"70vw"}}
                  mt={5}
                  p={{base:0,md:5}}
@@ -249,17 +249,12 @@ const Desk=(props)=>{
                          )}
                        </Tbody>
                      </Table>
-
-                     
-
-
-                  
-                 
+ 
                  </Box>
                  <Box
                    mt={5}
                    w={{base:"full",md:"30%"}}
-                   h={{base:"100vh",md:"full"}}
+                   h={{base:"50vh",md:"full"}}
                    textColor="whiteAlpha.500"
                    bgGradient="linear(rgba(115, 30, 58,0.9),rgba(38, 18, 31,0.9))"
                    >
@@ -288,25 +283,16 @@ const Desk=(props)=>{
 
             </Flex> 
      </Stack>
-       
-      <Stack
-       direction={{base:"column",md:"row"}}
-       w="full"
-       
-       //align="center"
-       fontFamily="monospace"
-       
-      >
+    
 
         <Box 
          w="full" 
-         h="full"
          p={10}
          //bgColor="green"
          >
            <CipherForm cipher={"AES"} />
         </Box>
-      </Stack>
+      
 
       
 
